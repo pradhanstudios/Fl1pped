@@ -8,6 +8,23 @@ Player::Player(Vector2 position, Vector2 size, Color skin)
     this->can_jump = false;
 }
 
+Vector2 Player::get_position()
+{
+    return this->position;
+}
+Vector2 Player::get_velocity()
+{
+    return this->velocity;
+}
+Vector2 Player::get_size()
+{
+    return this->size;
+}
+bool Player::get_jump()
+{
+    return this->can_jump;
+}
+
 void Player::draw_player()
 {
     // DrawTextureV(this->position, this->size, this->skin);

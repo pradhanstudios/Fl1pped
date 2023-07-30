@@ -40,6 +40,8 @@ int main(void)
 
         // update player
         player_one.update(ground);
+        // more debug :(
+        // printf("pos: %f, %f; vel: %f, %f; size: %f %f, can_jump: %d", player_one.get_position().x, player_one.get_position().y, player_one.get_velocity().x, player_one.get_velocity().y, player_one.get_size().x, player_one.get_size().y, player_one.get_jump() ? 1 : 0);
 
         // ---------------------------------------------------------
 
