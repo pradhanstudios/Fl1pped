@@ -14,10 +14,12 @@ int main(void)
     InitWindow(screen_width, screen_height, "Platformer");
 
     // initialize platforms
-    Platform ground = Platform(Vector2{400.0, 720.0}, Vector2{400.0, 80.0}, GREEN);
+    Platform ground1 = Platform(Vector2{400.0, 720.0}, Vector2{400.0, 50.0}, GREEN);
+    Platform ground2 = Platform(Vector2{200.0, 600.0}, Vector2{50.0, 50.0}, GREEN);
+    Platform ground3 = Platform(Vector2{600.0, 480.0}, Vector2{160.0, 50.0}, GREEN);
 
     // list of platforms
-    Platform platforms[] = {ground};
+    Platform platforms[] = {ground1, ground2, ground3};
     int num_platforms = sizeof(platforms) / sizeof(Platform);
 
     // initialize players
@@ -37,7 +39,7 @@ int main(void)
         // ---------------------------------------------------------
 
         // update player
-        player_one.update(ground);
+        player_one.update(ground1);
 
         // debug
         // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
@@ -52,7 +54,10 @@ int main(void)
         ClearBackground(RAYWHITE);
 
         // draw ground
-        ground.draw_tile();
+        for (Platform plat : platforms)
+        {
+            plat.draw_tile();
+        }
 
         // draw player
         player_one.draw_player();
