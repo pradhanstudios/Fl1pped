@@ -1,5 +1,5 @@
 #include "raylib.h"
-
+//123
 int main(void)
 {
     // initialization
@@ -30,7 +30,7 @@ int main(void)
         BeginDrawing();
 
         // refresh background
-        ClearBackground(BLACK);
+        ClearBackground(RAYWHITE);
 
         EndDrawing();
         // ---------------------------------------------------------
