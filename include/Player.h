@@ -10,7 +10,8 @@
 class Player
 {
 private:
-    Vector2 position; // TODO: getters for everything but skin
+    Vector2 size;
+    Vector2 position;
     Vector2 velocity;
     Vector2 acceleration;
     Color skin;
