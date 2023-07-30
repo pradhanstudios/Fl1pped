@@ -13,12 +13,12 @@ int main(void)
     // initialize window
     InitWindow(screen_width, screen_height, "Platformer");
 
-    // ground
-    Platform ground = Platform(Vector2{screen_width / 2, screen_height - 80.0}, Vector2{80.0, 80.0}, GREEN);
+    // initialize platforms
+    Platform ground = Platform(Vector2{400.0, 720.0}, Vector2{400.0, 80.0}, GREEN);
 
     // list of platforms
-    // Platform p_screen[1] = ground;
-    // int num_platforms = 1;
+    Platform platforms[] = {ground};
+    int num_platforms = sizeof(platforms) / sizeof(Platform);
 
     // initialize players
     Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON);
