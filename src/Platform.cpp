@@ -20,3 +20,8 @@ Vector2 Platform::get_size()
 {
     return (Vector2){this->rect.width, this->rect.height};
 }
+
+Rectangle Platform::get_rect()
+{
+    return this->rect;
+}

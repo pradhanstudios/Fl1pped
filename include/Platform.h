@@ -13,4 +13,5 @@ public:
     void draw_tile();
     Vector2 get_size();
     Vector2 get_position();
+    Rectangle get_rect();
 };

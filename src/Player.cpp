@@ -41,6 +41,14 @@ void Player::draw_player()
     DrawRectangleRec(this->rect, this->skin);
 }
 
+void Player::update(Platform *platforms, int num_platforms)
+{
+    for (int i = 0; i < num_platforms; i++)
+    {
+        this->move(platforms[i]);
+    }
+}
+
 void Player::update(Platform plat)
 {
     this->move(plat);

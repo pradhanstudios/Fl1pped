@@ -27,7 +27,7 @@ public:
     // bool get_jump();
     void draw_player();
     void update(Platform plat);
-    // void update(Platform *platforms, int num_platforms);
+    void update(Platform *platforms, int num_platforms);
     void move(Platform plat);
     void jump();
     bool collides_with_platform(Platform platform);
