@@ -10,8 +10,7 @@
 class Player
 {
 private:
-    Vector2 position;
-    Vector2 size;
+    Vector2 position; // TODO: getters for everything but skin
     Vector2 velocity;
     Vector2 acceleration;
     Color skin;
@@ -26,4 +25,8 @@ public:
     void move(Platform plat);
     void jump();
     bool collides_with_platform(Platform platform);
+    Vector2 get_position();
+    Vector2 get_velocity();
+    Vector2 get_size();
+    bool get_jump();
 };
