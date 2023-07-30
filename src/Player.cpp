@@ -28,13 +28,6 @@ void Player::move()
         this->acceleration.x = ACCELERATION;
     }
 
-    // FIXME: temporary until collisions
-    if (this->position.y > GetScreenHeight() / 4)
-    {
-        this->acceleration.y = 0;
-        this->velocity.y = 0;
-    }
-
     // 2D kinematics
     this->acceleration.x += this->velocity.x * FRICTION;
     this->velocity.x += this->acceleration.x;
@@ -51,4 +44,10 @@ void Player::move()
     {
         this->position.x = GetScreenWidth();
     }
+}
+
+void Player::jump()
+{
+    // FIXME: make it so that this only does anything if touching Platform
+    this->velocity.y = -10;
 }
