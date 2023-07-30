@@ -11,9 +11,9 @@ class Player
 {
 private:
     Vector2 position;
+    Vector2 size;
     Vector2 velocity;
     Vector2 acceleration;
-    Vector2 size;
     Color skin;
     // Texture2D skin;
     bool can_jump;

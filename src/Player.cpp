@@ -77,10 +77,10 @@ void Player::jump()
 // input: list of platforms
 bool Player::collides_with_platform(Platform plat)
 {
-    float plat_right = plat.get_position().x + plat.get_size();
+    float plat_right = plat.get_position().x + plat.get_size().x;
     float play_right = this->position.x + this->size.x;
 
-    float plat_bot = plat.get_position().y + plat.get_size();
+    float plat_bot = plat.get_position().y + plat.get_size().y;
     float play_bot = this->position.y + this->size.y;
 
     bool in_x = ((this->position.x <= plat_right) && (play_right >= plat.get_position().x));

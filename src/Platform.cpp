@@ -1,25 +1,24 @@
 #include "Platform.h"
 
-Platform::Platform(Vector2 position, Color tile)
+Platform::Platform(Vector2 position, Vector2 size, Color tile)
 {
-    this->position = position;
-    this->size = 80.0;
+    this->rect = Rectangle{position.x, position.y, size.x, size.y};
     this->tile = tile;
 }
 
 void Platform::draw_tile()
 {
-    DrawRectangleV(this->position, Vector2{this->size, this->size}, this->tile);
+    DrawRectangleRec(this->rect, this->tile);
 }
 
 Vector2 Platform::get_position()
 {
-    return this->position;
+    return (Vector2){this->rect.x, this->rect.y};
 }
 
-float Platform::get_size()
+Vector2 Platform::get_size()
 {
-    return this->size;
+    return (Vector2){this->rect.width, this->rect.height};
 }
 
 // Color Platform::get_tile()

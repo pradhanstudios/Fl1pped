@@ -14,7 +14,7 @@ int main(void)
     // Texture2D tile_types[??] = { // tiles // };
     Color tile_types[4] = {GREEN, BLUE, RED, BLACK};
     // Vector2 ground_size = {screen_width / 2, screen_height / 12};
-    Platform ground = Platform(Vector2{screen_width / 2, screen_height - 80.0}, tile_types[0]);
+    Platform ground = Platform(Vector2{screen_width / 2, screen_height - 80.0}, Vector2{80.0, 80.0}, tile_types[0]);
 
     // list of platforms
     // Platform p_screen[1] = ground;
