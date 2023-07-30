@@ -7,9 +7,9 @@ class Platform
 private:
     // Vector2 size;
     // Vector2 position;
+    Rectangle rect;
     Color tile;
     // Texture2D tile;
-    Rectangle rect;
 
 public:
     Platform(Vector2 position, Vector2 size, Color tile);

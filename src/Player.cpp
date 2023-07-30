@@ -2,9 +2,12 @@
 
 Player::Player(Vector2 position, Vector2 size, Color skin)
 {
+    this->velocity = (Vector2){0.0, 0.0};
+    this->acceleration.x = 0;
+    this->acceleration.y = GRAVITY;
     this->rect = Rectangle{position.x, position.y, size.x, size.y};
     this->skin = skin;
-    this->can_jump = false;
+    // this->can_jump = false;
 }
 
 Vector2 Player::get_position()
@@ -27,10 +30,10 @@ Vector2 Player::get_size()
     return (Vector2){this->rect.width, this->rect.height};
 }
 
-bool Player::get_jump()
-{
-    return this->can_jump;
-}
+// bool Player::get_jump()
+// {
+//     return this->can_jump;
+// }
 
 void Player::draw_player()
 {
@@ -64,7 +67,7 @@ void Player::move(Platform plat)
     {
         if (collides)
         {
-            this->position.y = plat.get_position().y - this->size.y;
+            this->rect.y = plat.get_position().y - this->rect.height;
             this->velocity.y = 0;
         }
     }
@@ -79,17 +82,17 @@ void Player::move(Platform plat)
     this->acceleration.x += this->velocity.x * FRICTION;
     this->velocity.x += this->acceleration.x;
     this->velocity.y += this->acceleration.y;
-    this->position.x += this->velocity.x + (0.5 * this->acceleration.x);
-    this->position.y += this->velocity.y + (0.5 * this->acceleration.y);
+    this->rect.x += this->velocity.x + (0.5 * this->acceleration.x);
+    this->rect.y += this->velocity.y + (0.5 * this->acceleration.y);
 
     // horizontal screen warp
-    if (this->position.x > GetScreenWidth())
+    if (this->rect.x > GetScreenWidth())
     {
-        this->position.x = 0;
+        this->rect.x = 0;
     }
-    if (this->position.x < 0)
+    if (this->rect.x < 0)
     {
-        this->position.x = GetScreenWidth();
+        this->rect.x = GetScreenWidth();
     }
 }
 
@@ -102,13 +105,13 @@ void Player::jump()
 bool Player::collides_with_platform(Platform plat)
 {
     float plat_right = plat.get_position().x + plat.get_size().x;
-    float play_right = this->position.x + this->size.x;
+    float play_right = this->rect.x + this->rect.width;
 
     float plat_bot = plat.get_position().y + plat.get_size().y;
-    float play_bot = this->position.y + this->size.y;
+    float play_bot = this->rect.y + this->rect.height;
 
-    bool in_x = ((this->position.x <= plat_right) && (play_right >= plat.get_position().x));
-    bool in_y = ((play_bot >= plat.get_position().y) && (this->position.y <= plat_bot));
+    bool in_x = ((this->rect.x <= plat_right) && (play_right >= plat.get_position().x));
+    bool in_y = ((play_bot >= plat.get_position().y) && (this->rect.y <= plat_bot));
 
     // simple collision
     return in_x && in_y;

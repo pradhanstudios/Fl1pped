@@ -20,8 +20,3 @@ Vector2 Platform::get_size()
 {
     return (Vector2){this->rect.width, this->rect.height};
 }
-
-// Color Platform::get_tile()
-// {
-//     return this->tile;
-// }
