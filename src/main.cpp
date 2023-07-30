@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "Player.h"
 
 int main(void)
 {
@@ -8,6 +9,9 @@ int main(void)
 
     // initialize window
     InitWindow(screen_width, screen_height, "Window Title");
+
+    // initialize players
+    Player player_one((Vector2){screen_width / 2, screen_height / 2}, (Vector2){25, 75}, MAROON);
 
     // frames per second
     SetTargetFPS(60);
@@ -26,6 +30,8 @@ int main(void)
 
         // refresh background
         ClearBackground(RAYWHITE);
+
+        player_one.draw_player();
 
         EndDrawing();
         // ---------------------------------------------------------
