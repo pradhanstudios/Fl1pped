@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-#define FRICTION (double)-0.001;
+#define FRICTION (double)-0.12;
 #define GRAVITY (double)0.5;
 #define ACCELERATION (double)0.5;
 
