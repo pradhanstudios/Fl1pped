@@ -18,11 +18,6 @@ int main(void)
         // UPDATE
         // ---------------------------------------------------------
 
-        // toggle fullscreen
-        if (IsKeyDown(KEY_F))
-        {
-            ToggleFullscreen();
-        }
         // ---------------------------------------------------------
 
         // DRAW
