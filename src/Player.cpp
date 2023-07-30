@@ -18,6 +18,11 @@ Vector2 Player::get_velocity()
     return this->velocity;
 }
 
+Vector2 Player::get_acceleration()
+{
+    return this->acceleration;
+}
+
 Vector2 Player::get_size()
 {
     return this->size;

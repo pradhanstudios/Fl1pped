@@ -24,6 +24,7 @@ public:
     // accessor methods
     Vector2 get_position();
     Vector2 get_velocity();
+    Vector2 get_acceleration();
     Vector2 get_size();
     bool get_jump();
     //
