@@ -1,5 +1,5 @@
 #include "raylib.h"
-//123
+
 int main(void)
 {
     // initialization
