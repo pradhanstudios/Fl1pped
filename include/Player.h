@@ -12,6 +12,7 @@ class Player
 private:
     Vector2 size;
     Vector2 position;
+    Rectangle rect;
     Vector2 velocity;
     Vector2 acceleration;
     Color skin;

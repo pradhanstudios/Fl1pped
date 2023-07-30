@@ -2,15 +2,14 @@
 
 Player::Player(Vector2 position, Vector2 size, Color skin)
 {
-    this->position = position;
-    this->size = size;
+    this->rect = Rectangle{position.x, position.y, size.x, size.y};
     this->skin = skin;
     this->can_jump = false;
 }
 
 Vector2 Player::get_position()
 {
-    return this->position;
+    return (Vector2){this->rect.x, this->rect.y};
 }
 
 Vector2 Player::get_velocity()
@@ -20,7 +19,7 @@ Vector2 Player::get_velocity()
 
 Vector2 Player::get_size()
 {
-    return this->size;
+    return (Vector2){this->rect.width, this->rect.height};
 }
 
 bool Player::get_jump()
@@ -31,7 +30,7 @@ bool Player::get_jump()
 void Player::draw_player()
 {
     // DrawTextureV(this->position, this->size, this->skin);
-    DrawRectangleV(this->position, this->size, this->skin);
+    DrawRectangleRec(this->rect, this->skin);
 }
 
 void Player::update(Platform plat)
