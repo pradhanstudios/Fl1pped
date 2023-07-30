@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Platform.h"
+#include <stdio.h>
 
 int main(void)
 {
@@ -22,6 +23,9 @@ int main(void)
 
     // frames per second
     SetTargetFPS(60);
+
+    // debug
+    // printf("Position: %f, %f; Size: %f, %f;", ground.get_position().x, ground.get_position().y, ground.get_size().x, ground.get_size().y);
 
     // game loop
     while (!WindowShouldClose())

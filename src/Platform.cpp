@@ -11,3 +11,17 @@ void Platform::draw_tile()
 {
     DrawRectangleV(this->position, this->size, this->tile);
 }
+
+Vector2 Platform::get_position()
+{
+    return this->position;
+}
+
+Vector2 Platform::get_size()
+{
+    return this->size;
+}
+Color Platform::get_tile()
+{
+    return this->tile;
+}
