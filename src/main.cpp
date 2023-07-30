@@ -10,19 +10,22 @@ int main(void)
     const int screen_height = 800;
 
     // ground
-    Vector2 ground_size = {screen_width / 2, screen_height / 12};
-    Vector2 ground_pos = {ground_size.x / 2, (float)(screen_height - ground_size.y)};
+    // Texture2D tile_types[??] = { // tiles // };
+    // Color tile_types[4] = {GREEN, BLUE, RED, BLACK};
+    // Vector2 ground_size = {screen_width / 2, screen_height / 12};
+    Vector2 ground_pos = {screen_width / 2, screen_height - 80.0};
     Color ground_color = GREEN;
     Platform ground = Platform(ground_pos, ground_color);
 
     // list of platforms
-    Platform p_screen[1] = {ground};
+    // Platform p_screen[1] = ground;
+    // int num_platforms = 1;
 
     // initialize window
     InitWindow(screen_width, screen_height, "Platformer");
 
     // initialize players
-    Player player_one((Vector2){screen_width / 2, screen_height / 2}, (Vector2){25, 75}, MAROON);
+    Player player_one((Vector2){screen_width / 2, screen_height / 2}, (Vector2){30, 80}, MAROON);
 
     // frames per second
     SetTargetFPS(60);
@@ -37,11 +40,12 @@ int main(void)
         // ---------------------------------------------------------
 
         // update player
-        if (IsKeyDown(KEY_W))
+        // player_one.update(ground);
+        if (IsKeyDown(KEY_W) && player_one.collides_with_platform(ground))
         {
             player_one.jump();
         }
-        player_one.move();
+        player_one.move(ground);
 
         // ---------------------------------------------------------
 

@@ -13,7 +13,7 @@ void Player::draw_player()
     DrawRectangleV(this->position, this->size, this->skin);
 }
 
-void Player::move()
+void Player::move(Platform plat)
 {
     // set acceleration values
     this->acceleration.x = 0;
@@ -26,6 +26,16 @@ void Player::move()
     if (IsKeyDown(KEY_D))
     {
         this->acceleration.x = ACCELERATION;
+    }
+
+    bool collides = this->collides_with_platform(plat);
+    if (this->velocity.y > 0)
+    {
+        if (collides)
+        {
+            this->position.y = plat.get_position().y - this->size.y;
+            this->velocity.y = 0;
+        }
     }
 
     // 2D kinematics
@@ -51,16 +61,18 @@ void Player::jump()
     this->velocity.y = -10;
 }
 
-bool Player::collides_with_platform(Platform *platforms, int num_platforms)
+// input: list of platforms
+bool Player::collides_with_platform(Platform plat)
 {
-    for (int i = 0; i < num_platforms; i++)
-    {
-        // TODO: check for Player collision with cur Platform
-        return true; // temp
-    }
+    float plat_right = plat.get_position().x + plat.get_size();
+    float play_right = this->position.x + this->size.x;
 
-    // until collisions are implemented
-    return true;
+    float plat_bot = plat.get_position().y + plat.get_size();
+    float play_bot = this->position.y + this->size.y;
 
-    // return false;
+    bool in_x = ((this->position.x <= plat_right) && (play_right >= plat.get_position().x));
+    bool in_y = ((play_bot >= plat.get_position().y) && (this->position.y <= plat_bot));
+
+    // simple collision
+    return in_x && in_y;
 }

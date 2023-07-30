@@ -3,7 +3,7 @@
 Platform::Platform(Vector2 position, Color tile)
 {
     this->position = position;
-    this->size = 100.0;
+    this->size = 80.0;
     this->tile = tile;
 }
 
