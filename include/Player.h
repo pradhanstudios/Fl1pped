@@ -20,6 +20,7 @@ private:
 public:
     Player(Vector2 position, Vector2 size, Color skin); // Texture2D skin
     void draw_player();
+    void update(Platform plat);
     void move(Platform plat);
     void jump();
     bool collides_with_platform(Platform platform);

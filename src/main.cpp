@@ -41,12 +41,7 @@ int main(void)
         // ---------------------------------------------------------
 
         // update player
-        // player_one.update(ground);
-        if (IsKeyDown(KEY_W) && player_one.collides_with_platform(ground))
-        {
-            player_one.jump();
-        }
-        player_one.move(ground);
+        player_one.update(ground);
 
         // ---------------------------------------------------------
 

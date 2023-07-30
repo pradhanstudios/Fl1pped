@@ -13,6 +13,11 @@ void Player::draw_player()
     DrawRectangleV(this->position, this->size, this->skin);
 }
 
+void Player::update(Platform plat)
+{
+    this->move(plat);
+}
+
 void Player::move(Platform plat)
 {
     // set acceleration values
@@ -28,6 +33,7 @@ void Player::move(Platform plat)
         this->acceleration.x = ACCELERATION;
     }
 
+    // stand on platform
     bool collides = this->collides_with_platform(plat);
     if (this->velocity.y > 0)
     {
@@ -36,6 +42,12 @@ void Player::move(Platform plat)
             this->position.y = plat.get_position().y - this->size.y;
             this->velocity.y = 0;
         }
+    }
+
+    // jump
+    if (IsKeyDown(KEY_W) && this->collides_with_platform(plat))
+    {
+        this->jump();
     }
 
     // 2D kinematics
