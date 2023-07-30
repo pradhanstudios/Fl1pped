@@ -12,14 +12,17 @@ Vector2 Player::get_position()
 {
     return this->position;
 }
+
 Vector2 Player::get_velocity()
 {
     return this->velocity;
 }
+
 Vector2 Player::get_size()
 {
     return this->size;
 }
+
 bool Player::get_jump()
 {
     return this->can_jump;

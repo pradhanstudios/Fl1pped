@@ -10,6 +10,9 @@ int main(void)
     const int screen_width = 1200;
     const int screen_height = 800;
 
+    // initialize window
+    InitWindow(screen_width, screen_height, "Platformer");
+
     // ground
     // Texture2D tile_types[??] = { // tiles // };
     Color tile_types[4] = {GREEN, BLUE, RED, BLACK};
@@ -20,17 +23,15 @@ int main(void)
     // Platform p_screen[1] = ground;
     // int num_platforms = 1;
 
-    // initialize window
-    InitWindow(screen_width, screen_height, "Platformer");
-
     // initialize players
-    Player player_one = Player((Vector2){screen_width / 2, screen_height / 2}, (Vector2){30, 80}, MAROON);
+    Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON);
 
     // frames per second
     SetTargetFPS(60);
 
     // debug
     // printf("Position: %f, %f; Size: %f, %f;", ground.get_position().x, ground.get_position().y, ground.get_size().x, ground.get_size().y);
+    // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
 
     // game loop
     while (!WindowShouldClose())
@@ -40,8 +41,9 @@ int main(void)
 
         // update player
         player_one.update(ground);
-        // more debug :(
-        // printf("pos: %f, %f; vel: %f, %f; size: %f %f, can_jump: %d", player_one.get_position().x, player_one.get_position().y, player_one.get_velocity().x, player_one.get_velocity().y, player_one.get_size().x, player_one.get_size().y, player_one.get_jump() ? 1 : 0);
+
+        // debug
+        // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
 
         // ---------------------------------------------------------
 
