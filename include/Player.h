@@ -16,11 +16,13 @@ private:
     Vector2 size;
     Color skin;
     // Texture2D skin;
+    bool can_jump;
 
 public:
     Player(Vector2 position, Vector2 size, Color skin); // Texture2D skin
     void draw_player();
     void update(Platform plat);
+    void update(Platform *platforms, int num_platforms);
     void move(Platform plat);
     void jump();
     bool collides_with_platform(Platform platform);

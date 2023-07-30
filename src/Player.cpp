@@ -5,6 +5,7 @@ Player::Player(Vector2 position, Vector2 size, Color skin)
     this->position = position;
     this->size = size;
     this->skin = skin;
+    this->can_jump = false;
 }
 
 void Player::draw_player()

@@ -9,6 +9,8 @@ private:
     Vector2 position;
     Color tile;
     // Texture2D tile;
+    Rectangle rect;
+
 public:
     Platform(Vector2 position, Color tile);
     void draw_tile();
