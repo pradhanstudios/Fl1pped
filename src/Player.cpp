@@ -48,6 +48,19 @@ void Player::move()
 
 void Player::jump()
 {
-    // FIXME: make it so that this only does anything if touching Platform
     this->velocity.y = -10;
+}
+
+bool Player::collides_with_platform(Platform *platforms, int num_platforms)
+{
+    for (int i = 0; i < num_platforms; i++)
+    {
+        // TODO: check for Player collision with cur Platform
+        return true; // temp
+    }
+
+    // until collisions are implemented
+    return true;
+
+    // return false;
 }

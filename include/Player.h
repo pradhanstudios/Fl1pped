@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Platform.h"
 #include "raylib.h"
 
 #define FRICTION (double)-0.12;
@@ -21,4 +22,5 @@ public:
     void draw_player();
     void move();
     void jump();
+    bool collides_with_platform(Platform *platforms, int num_platforms);
 };

@@ -13,7 +13,10 @@ int main(void)
     Vector2 ground_size = {screen_width / 2, screen_height / 12};
     Vector2 ground_pos = {ground_size.x / 2, (float)(screen_height - ground_size.y)};
     Color ground_color = GREEN;
-    Platform ground = Platform(ground_pos, ground_size, ground_color);
+    Platform ground = Platform(ground_pos, ground_color);
+
+    // list of platforms
+    Platform p_screen[1] = {ground};
 
     // initialize window
     InitWindow(screen_width, screen_height, "Platformer");

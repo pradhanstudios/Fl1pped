@@ -5,14 +5,14 @@
 class Platform
 {
 private:
-    Vector2 size;
+    float size;
     Vector2 position;
     Color tile;
     // Texture2D tile;
 public:
-    Platform(Vector2 position, Vector2 size, Color tile);
+    Platform(Vector2 position, Color tile);
     void draw_tile();
-    Vector2 get_size();
+    float get_size();
     Vector2 get_position();
-    Color get_tile();
+    // Color get_tile();
 };
