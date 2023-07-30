@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Platform.h"
+
 #include <stdio.h>
 
 int main(void)
@@ -25,7 +26,7 @@ int main(void)
     InitWindow(screen_width, screen_height, "Platformer");
 
     // initialize players
-    Player player_one((Vector2){screen_width / 2, screen_height / 2}, (Vector2){30, 80}, MAROON);
+    Player player_one = Player((Vector2){screen_width / 2, screen_height / 2}, (Vector2){30, 80}, MAROON);
 
     // frames per second
     SetTargetFPS(60);
