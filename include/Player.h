@@ -3,6 +3,8 @@
 #include "Platform.h"
 #include "raylib.h"
 
+#include <stdio.h>
+
 #define FRICTION (double)-0.12;
 #define GRAVITY (double)0.5;
 #define ACCELERATION (double)0.5;

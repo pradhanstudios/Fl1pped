@@ -17,9 +17,10 @@ int main(void)
     Platform ground1 = Platform(Vector2{400.0, 720.0}, Vector2{400.0, 50.0}, GREEN);
     Platform ground2 = Platform(Vector2{200.0, 600.0}, Vector2{50.0, 50.0}, GREEN);
     Platform ground3 = Platform(Vector2{600.0, 480.0}, Vector2{160.0, 50.0}, GREEN);
+    Platform ground4 = Platform(Vector2{700.0, 720.0 - 500.0}, Vector2{100.0, 500.0}, RED);
 
     // list of platforms
-    Platform platforms[] = {ground1, ground2, ground3};
+    Platform platforms[] = {ground1, ground2, ground3, ground4};
     int num_platforms = sizeof(platforms) / sizeof(Platform);
 
     // initialize players

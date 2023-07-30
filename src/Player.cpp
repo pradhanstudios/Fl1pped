@@ -73,14 +73,23 @@ void Player::move(Platform *platforms, int num_platforms)
     }
 
     // stand on platform
-    Platform collides = this->collides_with_platform(platforms, num_platforms);
-    bool collision = (collides.get_size().x != 0.0 && collides.get_size().y != 0.0);
+    Platform collide_plat = this->collides_with_platform(platforms, num_platforms);
+    bool collision = (collide_plat.get_size().x != 0.0 && collide_plat.get_size().y != 0.0);
     if (this->velocity.y > 0)
     {
         if (collision)
         {
-            this->rect.y = collides.get_position().y - this->rect.height;
-            this->velocity.y = 0;
+            // debug
+            // fprintf(stderr, "plat-y: %f\tplayer-y: %f\n", collide_plat.get_position().y, this->rect.y + this->rect.height);
+
+            // floor
+            if ((collide_plat.get_position().y <= (this->rect.y + this->rect.height)) && (collide_plat.get_position().y + collide_plat.get_size().y >= (this->rect.y + this->rect.height)))
+            {
+                this->rect.y = collide_plat.get_position().y - this->rect.height;
+                this->velocity.y = 0;
+            }
+            // implement else later
+            // else {}
         }
     }
 
