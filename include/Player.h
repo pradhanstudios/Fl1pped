@@ -29,6 +29,8 @@ public:
     void update(Platform plat);
     void update(Platform *platforms, int num_platforms);
     void move(Platform plat);
+    void move(Platform *platforms, int num_platforms);
     void jump();
     bool collides_with_platform(Platform platform);
+    Platform collides_with_platform(Platform *platforms, int num_platforms);
 };

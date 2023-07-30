@@ -39,7 +39,7 @@ int main(void)
         // ---------------------------------------------------------
 
         // update player
-        player_one.update(ground1);
+        player_one.update(platforms, num_platforms);
 
         // debug
         // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
