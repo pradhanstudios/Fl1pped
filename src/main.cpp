@@ -14,9 +14,6 @@ int main(void)
     InitWindow(screen_width, screen_height, "Platformer");
 
     // ground
-    // Texture2D tile_types[??] = { // tiles // };
-    // Color tile_types[4] = {GREEN, BLUE, RED, BLACK};
-    // Vector2 ground_size = {screen_width / 2, screen_height / 12};
     Platform ground = Platform(Vector2{screen_width / 2, screen_height - 80.0}, Vector2{80.0, 80.0}, GREEN);
 
     // list of platforms
@@ -51,11 +48,11 @@ int main(void)
         // ---------------------------------------------------------
         BeginDrawing();
 
-        // draw ground
-        ground.draw_tile();
-
         // refresh background
         ClearBackground(RAYWHITE);
+
+        // draw ground
+        ground.draw_tile();
 
         // draw player
         player_one.draw_player();
