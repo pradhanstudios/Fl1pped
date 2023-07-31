@@ -4,6 +4,7 @@
 #include "raylib.h"
 
 #include <stdio.h>
+#include <vector>
 
 #define FRICTION (double)-0.12;
 #define GRAVITY (double)0.5;
@@ -34,5 +35,6 @@ public:
     void move(Platform *platforms, int num_platforms);
     void jump();
     bool collides_with_platform(Platform platform);
-    Platform collides_with_platform(Platform *platforms, int num_platforms);
+    // Platform collides_with_platform(Platform *platforms, int num_platforms);
+    std::vector<Platform> collides_with_platform(Platform *platforms, int num_platforms);
 };

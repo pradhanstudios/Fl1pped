@@ -44,11 +44,6 @@ void Player::draw_player()
 void Player::update(Platform *platforms, int num_platforms)
 {
     this->move(platforms, num_platforms);
-
-    // for (int i = 0; i < num_platforms; i++)
-    // {
-    //     this->move(platforms[i]);
-    // }
 }
 
 void Player::update(Platform plat)
@@ -73,25 +68,31 @@ void Player::move(Platform *platforms, int num_platforms)
     }
 
     // stand on platform
-    Platform collide_plat = this->collides_with_platform(platforms, num_platforms);
-    bool collision = (collide_plat.get_size().x != 0.0 && collide_plat.get_size().y != 0.0);
-    if (this->velocity.y > 0)
-    {
-        if (collision)
-        {
-            // debug
-            // fprintf(stderr, "plat-y: %f\tplayer-y: %f\n", collide_plat.get_position().y, this->rect.y + this->rect.height);
+    // Platform collide_plat = this->collides_with_platform(platforms, num_platforms);
+    std::vector<Platform> collide_arr = this->collides_with_platform(platforms, num_platforms);
+    bool collision = !(collide_arr.empty());
 
-            // floor
-            if ((collide_plat.get_position().y <= (this->rect.y + this->rect.height)) && (collide_plat.get_position().y + collide_plat.get_size().y >= (this->rect.y + this->rect.height)))
+    if (collision)
+    {
+        int collide_len = collide_arr.size();
+        // debug
+        // fprintf(stderr, "plat-y: %f\tplayer-y: %f\n", collide_plat.get_position().y, this->rect.y + this->rect.height);
+
+        // collide floor (if moving down)
+        if (this->velocity.y > 0)
+        {
+            for (int i = 0; i < collide_len; i++)
             {
-                this->rect.y = collide_plat.get_position().y - this->rect.height;
-                this->velocity.y = 0;
+
+                if ((collide_arr[i].get_position().y <= (this->rect.y + this->rect.height)) && (collide_arr[i].get_position().y + collide_arr[i].get_size().y >= (this->rect.y + this->rect.height)))
+                {
+                    this->rect.y = collide_arr[i].get_position().y - this->rect.height;
+                    this->velocity.y = 0;
+                }
             }
-            // implement else later
-            // else {}
         }
     }
+    // }
 
     // jump
     if (IsKeyDown(KEY_W) && collision)
@@ -182,20 +183,6 @@ void Player::jump()
     this->velocity.y = -10;
 }
 
-Platform Player::collides_with_platform(Platform *platforms, int num_platforms)
-{
-    // loop thru each platform and return whichever platform the player touches
-    for (int i = 0; i < num_platforms; i++)
-    {
-        if (this->collides_with_platform(platforms[i]))
-        {
-            return platforms[i];
-        }
-    }
-
-    return Platform(Vector2{0.0, 0.0}, Vector2{0.0, 0.0}, BLANK);
-}
-
 bool Player::collides_with_platform(Platform plat)
 {
     float plat_right = plat.get_position().x + plat.get_size().x;
@@ -209,4 +196,34 @@ bool Player::collides_with_platform(Platform plat)
 
     // simple collision
     return in_x && in_y;
+}
+
+// Platform Player::collides_with_platform(Platform *platforms, int num_platforms)
+// {
+//     // loop thru each platform and return whichever platform the player touches
+//     for (int i = 0; i < num_platforms; i++)
+//     {
+//         if (this->collides_with_platform(platforms[i]))
+//         {
+//             return platforms[i];
+//         }
+//     }
+//     return Platform(Vector2{0.0, 0.0}, Vector2{0.0, 0.0}, BLANK);
+// }
+
+std::vector<Platform> Player::collides_with_platform(Platform *platforms, int num_platforms)
+{
+    // initialize result
+    std::vector<Platform> collide_arr;
+
+    // loop thru each platform and add each platform the player touches to collide_arr
+    for (int i = 0; i < num_platforms; i++)
+    {
+        if (this->collides_with_platform(platforms[i]))
+        {
+            collide_arr.push_back(platforms[i]);
+        }
+    }
+
+    return collide_arr;
 }
