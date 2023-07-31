@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Platform.h"
+#include "PlayerCamera.h"
 
 #include <stdio.h>
 
@@ -26,6 +27,9 @@ int main(void)
     // initialize players
     Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON);
 
+    // initialize camera
+    PlayerCamera camera1 = PlayerCamera(&player_one);
+
     // frames per second
     SetTargetFPS(60);
 
@@ -42,6 +46,9 @@ int main(void)
         // update player
         player_one.update(platforms, num_platforms);
 
+        // update camera
+        camera1.target_player();
+
         // debug
         // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
 
@@ -50,6 +57,8 @@ int main(void)
         // DRAW
         // ---------------------------------------------------------
         BeginDrawing();
+
+        camera1.start_camera();
 
         // refresh background
         ClearBackground(RAYWHITE);
@@ -62,6 +71,8 @@ int main(void)
 
         // draw player
         player_one.draw_player();
+
+        camera1.stop_camera();
 
         EndDrawing();
         // ---------------------------------------------------------
