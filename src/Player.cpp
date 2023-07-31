@@ -107,16 +107,6 @@ void Player::move(Platform *platforms, int num_platforms)
     this->rect.x += this->velocity.x + (0.5 * this->acceleration.x);
     this->rect.y += this->velocity.y + (0.5 * this->acceleration.y);
 
-    // horizontal screen warp
-    if (this->rect.x > GetScreenWidth())
-    {
-        this->rect.x = 0;
-    }
-    if (this->rect.x < 0)
-    {
-        this->rect.x = GetScreenWidth();
-    }
-
     // vertical screen warp
     if (this->rect.y > GetScreenHeight())
     {

@@ -15,10 +15,10 @@ int main(void)
     InitWindow(screen_width, screen_height, "Platformer");
 
     // initialize platforms
-    Platform ground1 = Platform(Vector2{400.0, 720.0}, Vector2{400.0, 50.0}, GREEN);
+    Platform ground1 = Platform(Vector2{400.0, 720.0}, Vector2{1800.0, 50.0}, GREEN);
     Platform ground2 = Platform(Vector2{200.0, 600.0}, Vector2{50.0, 50.0}, GREEN);
     Platform ground3 = Platform(Vector2{600.0, 480.0}, Vector2{160.0, 50.0}, GREEN);
-    Platform ground4 = Platform(Vector2{550.0, 720.0 - 500.0}, Vector2{100.0, 500.0}, RED);
+    Platform ground4 = Platform(Vector2{1000.0, 220.0}, Vector2{100.0, 500.0}, RED);
 
     // list of platforms
     Platform platforms[] = {ground1, ground2, ground3, ground4};
