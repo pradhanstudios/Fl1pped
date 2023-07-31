@@ -17,11 +17,15 @@ private:
     Vector2 velocity;
     Vector2 acceleration;
     Color skin;
+    int controls[3];
+    int up;
+    int left;
+    int right;
     // Texture2D skin;
     // bool can_jump;
 
 public:
-    Player(Vector2 position, Vector2 size, Color skin);
+    Player(Vector2 position, Vector2 size, Color skin, int controls[3]);
     // Player(Vector2 position, Vector2 size, Texture2D skin);
     Vector2 get_position();
     Vector2 get_velocity();

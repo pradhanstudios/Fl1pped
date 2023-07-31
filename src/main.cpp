@@ -25,10 +25,18 @@ int main(void)
     int num_platforms = sizeof(platforms) / sizeof(Platform);
 
     // initialize players
-    Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON);
+    int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
+    int player_two_controls[3] = {KEY_UP, KEY_RIGHT, KEY_LEFT};
+    Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON, player_one_controls);
+    Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, BLUE, player_two_controls);
 
-    // initialize camera
+    // initialize cameras
     PlayerCamera camera1 = PlayerCamera(&player_one);
+    PlayerCamera camera2 = PlayerCamera(&player_two);
+    // initialize two players rendering stuff
+    RenderTexture screenPlayer1 = LoadRenderTexture(screen_width / 2, screen_height);
+    RenderTexture screenPlayer2 = LoadRenderTexture(screen_width / 2, screen_height);
+    Rectangle splitScreenRect = {0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height};
 
     // frames per second
     SetTargetFPS(60);
@@ -45,9 +53,11 @@ int main(void)
 
         // update player
         player_one.update(platforms, num_platforms);
+        player_two.update(platforms, num_platforms);
 
         // update camera
         camera1.target_player();
+        camera2.target_player();
 
         // debug
         // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
@@ -59,29 +69,46 @@ int main(void)
 
         // DRAW
         // ---------------------------------------------------------
-        BeginDrawing();
-
+        BeginTextureMode(screenPlayer1);
         camera1.start_camera();
-
         // refresh background
         ClearBackground(RAYWHITE);
-
         // draw ground
         for (Platform plat : platforms)
         {
             plat.draw_tile();
         }
-
         // draw player
         player_one.draw_player();
-
         camera1.stop_camera();
+        EndTextureMode();
 
+        BeginTextureMode(screenPlayer2);
+        camera2.start_camera();
+        // refresh background
+        ClearBackground(RAYWHITE);
+        // draw ground
+        for (Platform plat : platforms)
+        {
+            plat.draw_tile();
+        }
+        // draw player
+        player_two.draw_player();
+        camera2.stop_camera();
+        EndTextureMode();
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawTextureRec(screenPlayer1.texture, splitScreenRect, (Vector2){0, 0}, WHITE);
+        DrawTextureRec(screenPlayer2.texture, splitScreenRect, (Vector2){screen_width / 2.0f, 0}, WHITE);
+        DrawLineV({screen_width / 2, 0.0}, {screen_width / 2, screen_height}, BLACK);
         EndDrawing();
         // ---------------------------------------------------------
     }
 
     // deinitialize
+    UnloadRenderTexture(screenPlayer1); // Unload render texture
+    UnloadRenderTexture(screenPlayer2); // Unload render texture
     CloseWindow();
 
     return 0;

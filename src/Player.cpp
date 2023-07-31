@@ -1,12 +1,15 @@
 #include "Player.h"
 
-Player::Player(Vector2 position, Vector2 size, Color skin)
+Player::Player(Vector2 position, Vector2 size, Color skin, int controls[3])
 {
     this->velocity = (Vector2){0.0, 0.0};
     this->acceleration.x = 0;
     this->acceleration.y = GRAVITY;
     this->rect = Rectangle{position.x, position.y, size.x, size.y};
     this->skin = skin;
+    this->up = controls[0];
+    this->left = controls[1];
+    this->right = controls[2];
     // this->can_jump = false;
 }
 
@@ -58,11 +61,11 @@ void Player::move(Platform *platforms, int num_platforms)
     this->acceleration.y = GRAVITY;
 
     // player movement
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(right))
     {
         this->acceleration.x = -ACCELERATION;
     }
-    if (IsKeyDown(KEY_D))
+    if (IsKeyDown(left))
     {
         this->acceleration.x = ACCELERATION;
     }
@@ -95,7 +98,7 @@ void Player::move(Platform *platforms, int num_platforms)
     // }
 
     // jump
-    if (IsKeyDown(KEY_W) && collision)
+    if (IsKeyDown(up) && collision)
     {
         this->jump();
     }
@@ -124,11 +127,11 @@ void Player::move(Platform plat)
     this->acceleration.x = 0;
     this->acceleration.y = GRAVITY;
 
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(right))
     {
         this->acceleration.x = -ACCELERATION;
     }
-    if (IsKeyDown(KEY_D))
+    if (IsKeyDown(left))
     {
         this->acceleration.x = ACCELERATION;
     }
@@ -145,7 +148,7 @@ void Player::move(Platform plat)
     }
 
     // jump
-    if (IsKeyDown(KEY_W) && this->collides_with_platform(plat))
+    if (IsKeyDown(up) && this->collides_with_platform(plat))
     {
         this->jump();
     }

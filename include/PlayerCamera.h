@@ -7,10 +7,11 @@ class PlayerCamera
 private:
     Camera2D camera;
     Player *player;
-    Vector2 target;
-    Vector2 offset;
-    float rotation;
-    float zoom;
+    // not needed
+    // Vector2 target;
+    // Vector2 offset;
+    // float rotation;
+    // float zoom;
 
 public:
     // init (c.o, c.r, c.z) --> camera
