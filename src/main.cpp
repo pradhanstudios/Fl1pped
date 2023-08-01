@@ -101,7 +101,7 @@ int main(void)
         BeginDrawing();
         ClearBackground(BLACK);
         screenPlayer1.combine(screenPlayer2.get_texture());
-        DrawLineV({screen_width / 2, 0.0}, {screen_width / 2, screen_height}, BLACK);
+        // DrawLineV({screen_width / 2, 0.0}, {screen_width / 2, screen_height}, BLACK);
         EndDrawing();
         // ---------------------------------------------------------
     }
