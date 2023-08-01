@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Platform.h"
 #include "PlayerCamera.h"
+#include "SplitScreen.h"
 
 #include <stdio.h>
 
@@ -34,9 +35,9 @@ int main(void)
     PlayerCamera camera1 = PlayerCamera(&player_one);
     PlayerCamera camera2 = PlayerCamera(&player_two);
     // initialize two players rendering stuff
-    RenderTexture screenPlayer1 = LoadRenderTexture(screen_width / 2, screen_height);
-    RenderTexture screenPlayer2 = LoadRenderTexture(screen_width / 2, screen_height);
-    Rectangle splitScreenRect = {0.0f, 0.0f, (float)screenPlayer1.texture.width, (float)-screenPlayer1.texture.height};
+    SplitScreen screenPlayer1 = SplitScreen();
+    SplitScreen screenPlayer2 = SplitScreen();
+    // Rectangle splitScreenRect = {0.0f, 0.0f, (float)screenPlayer1.get_texture().texture.width, (float)-screenPlayer1.get_texture().texture.height};
 
     // frames per second
     SetTargetFPS(60);
@@ -69,7 +70,7 @@ int main(void)
 
         // DRAW
         // ---------------------------------------------------------
-        BeginTextureMode(screenPlayer1);
+        screenPlayer1.start();
         camera1.start_camera();
         // refresh background
         ClearBackground(RAYWHITE);
@@ -81,9 +82,9 @@ int main(void)
         // draw player
         player_one.draw_player();
         camera1.stop_camera();
-        EndTextureMode();
+        screenPlayer1.end();
 
-        BeginTextureMode(screenPlayer2);
+        screenPlayer2.start();
         camera2.start_camera();
         // refresh background
         ClearBackground(RAYWHITE);
@@ -95,20 +96,19 @@ int main(void)
         // draw player
         player_two.draw_player();
         camera2.stop_camera();
-        EndTextureMode();
+        screenPlayer2.end();
 
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawTextureRec(screenPlayer1.texture, splitScreenRect, (Vector2){0, 0}, WHITE);
-        DrawTextureRec(screenPlayer2.texture, splitScreenRect, (Vector2){screen_width / 2.0f, 0}, WHITE);
+        screenPlayer1.combine(screenPlayer2.get_texture());
         DrawLineV({screen_width / 2, 0.0}, {screen_width / 2, screen_height}, BLACK);
         EndDrawing();
         // ---------------------------------------------------------
     }
 
     // deinitialize
-    UnloadRenderTexture(screenPlayer1); // Unload render texture
-    UnloadRenderTexture(screenPlayer2); // Unload render texture
+    screenPlayer1.free(); // Unload render texture
+    screenPlayer2.free(); // Unload render texture
     CloseWindow();
 
     return 0;
