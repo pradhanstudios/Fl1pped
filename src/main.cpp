@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Platform.h"
 #include "PlayerCamera.h"
-#include "SplitScreen.h"
+#include "Screen.h"
 
 #include <stdio.h>
 
@@ -35,9 +35,9 @@ int main(void)
     PlayerCamera camera1 = PlayerCamera(&player_one);
     PlayerCamera camera2 = PlayerCamera(&player_two);
     // initialize two players rendering stuff
-    SplitScreen screenPlayer1 = SplitScreen();
-    SplitScreen screenPlayer2 = SplitScreen();
-    // Rectangle splitScreenRect = {0.0f, 0.0f, (float)screenPlayer1.get_texture().texture.width, (float)-screenPlayer1.get_texture().texture.height};
+    Screen screenPlayer1 = Screen();
+    Screen screenPlayer2 = Screen();
+    // Rectangle Rect = {0.0f, 0.0f, (float)screenPlayer1.get_texture().texture.width, (float)-screenPlayer1.get_texture().texture.height};
 
     // frames per second
     SetTargetFPS(60);
