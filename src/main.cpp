@@ -29,7 +29,7 @@ int main(void)
     int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
     int player_two_controls[3] = {KEY_UP, KEY_RIGHT, KEY_LEFT};
     Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON, player_one_controls);
-    Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, BLUE, player_two_controls);
+    Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, DARKGREEN, player_two_controls);
 
     // initialize cameras
     PlayerCamera camera1 = PlayerCamera(&player_one);
