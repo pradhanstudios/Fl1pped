@@ -81,6 +81,7 @@ int main(void)
         }
         // draw player
         player_one.draw_player();
+        player_two.draw_player();
         camera1.stop_camera();
         screenPlayer1.end();
 
@@ -94,6 +95,7 @@ int main(void)
             plat.draw_tile();
         }
         // draw player
+        player_one.draw_player();
         player_two.draw_player();
         camera2.stop_camera();
         screenPlayer2.end();
