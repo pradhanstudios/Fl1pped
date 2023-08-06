@@ -3,6 +3,7 @@
 #include "Platform.h"
 #include "PlayerCamera.h"
 #include "Screen.h"
+#include "Scene.h"
 
 #include <stdio.h>
 
@@ -15,21 +16,20 @@ int main(void)
     // initialize window
     InitWindow(screen_width, screen_height, "Platformer");
 
-    // initialize platforms
-    Platform ground1 = Platform(Vector2{400.0, 720.0}, Vector2{1800.0, 50.0}, GREEN);
-    Platform ground2 = Platform(Vector2{200.0, 600.0}, Vector2{50.0, 50.0}, GREEN);
-    Platform ground3 = Platform(Vector2{600.0, 480.0}, Vector2{160.0, 50.0}, GREEN);
-    Platform ground4 = Platform(Vector2{1000.0, 220.0}, Vector2{100.0, 500.0}, RED);
-
-    // list of platforms
-    Platform platforms[] = {ground1, ground2, ground3, ground4};
-    int num_platforms = sizeof(platforms) / sizeof(Platform);
-
     // initialize players
     int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
     int player_two_controls[3] = {KEY_UP, KEY_RIGHT, KEY_LEFT};
     Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON, player_one_controls);
     Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, DARKGREEN, player_two_controls);
+
+    // initialize platforms
+    Scene level_0 = Scene('0', &player_one, &player_two);
+    level_0.load_scene();
+
+    // list of platforms
+    std::vector<Platform> platforms = level_0.get_platforms();
+    int num_platforms = platforms.size();
+    // fprintf(stderr, "%i", num_platforms);
 
     // initialize cameras
     PlayerCamera camera1 = PlayerCamera(&player_one);
@@ -55,6 +55,7 @@ int main(void)
         // update player
         player_one.update(platforms, num_platforms);
         player_two.update(platforms, num_platforms);
+        // fprintf(stderr, "p1: %f, %f p2: %f, %f \n", player_one.get_position().x, player_one.get_position().y, player_two.get_position().x, player_two.get_position().y);
 
         // update camera
         camera1.target_player();

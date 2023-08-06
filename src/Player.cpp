@@ -44,7 +44,7 @@ void Player::draw_player()
     DrawRectangleRec(this->rect, this->skin);
 }
 
-void Player::update(Platform *platforms, int num_platforms)
+void Player::update(std::vector<Platform> platforms, int num_platforms)
 {
     this->move(platforms, num_platforms);
 }
@@ -54,7 +54,7 @@ void Player::update(Platform plat)
     this->move(plat);
 }
 
-void Player::move(Platform *platforms, int num_platforms)
+void Player::move(std::vector<Platform> platforms, int num_platforms)
 {
     // set acceleration values
     this->acceleration.x = 0;
@@ -204,7 +204,7 @@ bool Player::collides_with_platform(Platform plat)
 //     return Platform(Vector2{0.0, 0.0}, Vector2{0.0, 0.0}, BLANK);
 // }
 
-std::vector<Platform> Player::collides_with_platform(Platform *platforms, int num_platforms)
+std::vector<Platform> Player::collides_with_platform(std::vector<Platform> platforms, int num_platforms)
 {
     // initialize result
     std::vector<Platform> collide_arr;
@@ -219,4 +219,10 @@ std::vector<Platform> Player::collides_with_platform(Platform *platforms, int nu
     }
 
     return collide_arr;
+}
+
+void Player::set_position(Vector2 position)
+{
+    this->rect.x = position.x;
+    this->rect.y = position.y;
 }

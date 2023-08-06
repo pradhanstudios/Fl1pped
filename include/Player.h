@@ -34,11 +34,12 @@ public:
     // bool get_jump();
     void draw_player();
     void update(Platform plat);
-    void update(Platform *platforms, int num_platforms);
+    void update(std::vector<Platform> platforms, int num_platforms);
     void move(Platform plat);
-    void move(Platform *platforms, int num_platforms);
+    void move(std::vector<Platform> platforms, int num_platforms);
     void jump();
     bool collides_with_platform(Platform platform);
     // Platform collides_with_platform(Platform *platforms, int num_platforms);
-    std::vector<Platform> collides_with_platform(Platform *platforms, int num_platforms);
+    std::vector<Platform> collides_with_platform(std::vector<Platform> platforms, int num_platforms);
+    void set_position(Vector2 position);
 };
