@@ -23,10 +23,12 @@ private:
     int right;
     // Texture2D skin;
     // bool can_jump;
+    std::vector<Vector2> collision_points;
 
 public:
     Player(Vector2 position, Vector2 size, Color skin, int controls[3]);
     // Player(Vector2 position, Vector2 size, Texture2D skin);
+    void update_collision_points();
     Vector2 get_position();
     Vector2 get_velocity();
     Vector2 get_acceleration();

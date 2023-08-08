@@ -10,7 +10,21 @@ Player::Player(Vector2 position, Vector2 size, Color skin, int controls[3])
     this->up = controls[0];
     this->left = controls[1];
     this->right = controls[2];
-    // this->can_jump = false;
+}
+
+void Player::update_collision_points()
+{
+    this->collision_points.clear();
+    // left is less than right
+    this->collision_points.push_back((Vector2){this->rect.x, this->rect.y});                                                // top left
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y}));                         // top middle
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y}));                             // top right
+    this->collision_points.push_back((Vector2{this->rect.x, this->rect.y + this->rect.height / 2}));                        // middle left
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height / 2})); // middle middle
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y + this->rect.height / 2}));     // middle right
+    this->collision_points.push_back((Vector2{this->rect.x, this->rect.y + this->rect.height}));                            // bottom left
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height}));     // bottom middle
+    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y + this->rect.height}));         // bottom right
 }
 
 Vector2 Player::get_position()
@@ -42,6 +56,12 @@ void Player::draw_player()
 {
     // DrawTextureV(this->position, this->size, this->skin);
     DrawRectangleRec(this->rect, this->skin);
+    // debug
+    this->update_collision_points();
+    for (Vector2 pos : this->collision_points)
+    {
+        DrawPixelV(pos, RED);
+    }
 }
 
 void Player::update(std::vector<Platform> platforms, int num_platforms)
