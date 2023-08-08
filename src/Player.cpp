@@ -16,15 +16,24 @@ void Player::update_collision_points()
 {
     this->collision_points.clear();
     // left is less than right
-    this->collision_points.push_back((Vector2){this->rect.x, this->rect.y});                                                // top left
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y}));                         // top middle
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y}));                             // top right
-    this->collision_points.push_back((Vector2{this->rect.x, this->rect.y + this->rect.height / 2}));                        // middle left
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height / 2})); // middle middle
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y + this->rect.height / 2}));     // middle right
-    this->collision_points.push_back((Vector2{this->rect.x, this->rect.y + this->rect.height}));                            // bottom left
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height}));     // bottom middle
-    this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y + this->rect.height}));         // bottom right
+    this->point_1 = (Vector2){this->rect.x, this->rect.y};                                                // top left
+    this->point_2 = (Vector2){this->rect.x + this->rect.width / 2, this->rect.y};                         // top middle
+    this->point_3 = (Vector2){this->rect.x + this->rect.width, this->rect.y};                             // top right
+    this->point_4 = (Vector2){this->rect.x, this->rect.y + this->rect.height / 2};                        // middle left
+    this->point_5 = (Vector2){this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height / 2}; // middle middle
+    this->point_6 = (Vector2){this->rect.x + this->rect.width, this->rect.y + this->rect.height / 2};     // middle right
+    this->point_7 = (Vector2){this->rect.x, this->rect.y + this->rect.height};                            // bottom left
+    this->point_8 = (Vector2){this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height};     // bottom middle
+    this->point_9 = (Vector2){this->rect.x + this->rect.width, this->rect.y + this->rect.height};         // bottom right
+    this->collision_points.push_back(this->point_1);
+    this->collision_points.push_back(this->point_2);
+    this->collision_points.push_back(this->point_3);
+    this->collision_points.push_back(this->point_4);
+    this->collision_points.push_back(this->point_5);
+    this->collision_points.push_back(this->point_6);
+    this->collision_points.push_back(this->point_7);
+    this->collision_points.push_back(this->point_8);
+    this->collision_points.push_back(this->point_9);
 }
 
 Vector2 Player::get_position()
@@ -57,7 +66,6 @@ void Player::draw_player()
     // DrawTextureV(this->position, this->size, this->skin);
     DrawRectangleRec(this->rect, this->skin);
     // debug
-    this->update_collision_points();
     for (Vector2 pos : this->collision_points)
     {
         DrawPixelV(pos, RED);
@@ -92,33 +100,36 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
 
     // stand on platform
     // Platform collide_plat = this->collides_with_platform(platforms, num_platforms);
-    std::vector<Platform> collide_arr = this->collides_with_platform(platforms, num_platforms);
-    bool collision = !(collide_arr.empty());
+    std::vector<int> collide_points = this->collides_with_platform(platforms, num_platforms);
+    bool collision = !(collide_points.empty());
 
     if (collision)
     {
-        int collide_len = collide_arr.size();
+        int collide_len = collide_points.size();
         // debug
         // fprintf(stderr, "plat-y: %f\tplayer-y: %f\n", collide_plat.get_position().y, this->rect.y + this->rect.height);
 
         // collide floor (if moving down)
-        if (this->velocity.y > 0)
+        for (int i = 0; i < collide_len; i++)
         {
-            for (int i = 0; i < collide_len; i++)
+            // check middles
+            switch (collide_points[i])
             {
-
-                if ((collide_arr[i].get_position().y <= (this->rect.y + this->rect.height)) && (collide_arr[i].get_position().y + collide_arr[i].get_size().y >= (this->rect.y + this->rect.height)))
-                {
-                    this->rect.y = collide_arr[i].get_position().y - this->rect.height;
-                    this->velocity.y = 0;
-                }
+            case 2:
+                this->velocity.y = 1;
+            case 4:
+                this->acceleration.x = ACCELERATION;
+            case 6:
+                this->acceleration.x = -ACCELERATION;
+            case 8:
+                this->velocity.y = -1;
             }
         }
     }
     // }
 
     // jump
-    if (IsKeyDown(up) && collision)
+    if (IsKeyDown(up) && !(std::find(collide_points.begin(), collide_points.end(), 8) == collide_points.end()))
     {
         this->jump();
     }
@@ -157,10 +168,10 @@ void Player::move(Platform plat)
     }
 
     // stand on platform
-    bool collides = this->collides_with_platform(plat);
+    std::vector<Vector2> collides = this->collides_with_platform(plat);
     if (this->velocity.y > 0)
     {
-        if (collides)
+        if (!collides.empty())
         {
             this->rect.y = plat.get_position().y - this->rect.height;
             this->velocity.y = 0;
@@ -168,7 +179,7 @@ void Player::move(Platform plat)
     }
 
     // jump
-    if (IsKeyDown(up) && this->collides_with_platform(plat))
+    if (IsKeyDown(up) && !this->collides_with_platform(plat).empty())
     {
         this->jump();
     }
@@ -196,19 +207,18 @@ void Player::jump()
     this->velocity.y = -10;
 }
 
-bool Player::collides_with_platform(Platform plat)
+std::vector<Vector2> Player::collides_with_platform(Platform plat)
 {
-    float plat_right = plat.get_position().x + plat.get_size().x;
-    float play_right = this->rect.x + this->rect.width;
-
-    float plat_bot = plat.get_position().y + plat.get_size().y;
-    float play_bot = this->rect.y + this->rect.height;
-
-    bool in_x = ((this->rect.x <= plat_right) && (play_right >= plat.get_position().x));
-    bool in_y = ((play_bot >= plat.get_position().y) && (this->rect.y <= plat_bot));
-
-    // simple collision
-    return in_x && in_y;
+    this->update_collision_points();
+    std::vector<Vector2> collided_points;
+    for (Vector2 pos : this->collision_points)
+    {
+        if (CheckCollisionPointRec(pos, (Rectangle){plat.get_position().x, plat.get_position().y, plat.get_size().x, plat.get_size().y}))
+        {
+            collided_points.push_back(pos);
+        }
+    }
+    return collided_points;
 }
 
 // Platform Player::collides_with_platform(Platform *platforms, int num_platforms)
@@ -224,17 +234,58 @@ bool Player::collides_with_platform(Platform plat)
 //     return Platform(Vector2{0.0, 0.0}, Vector2{0.0, 0.0}, BLANK);
 // }
 
-std::vector<Platform> Player::collides_with_platform(std::vector<Platform> platforms, int num_platforms)
+std::vector<int> Player::collides_with_platform(std::vector<Platform> platforms, int num_platforms)
 {
     // initialize result
-    std::vector<Platform> collide_arr;
+    std::vector<int> collide_arr;
+    std::vector<Vector2> output;
 
     // loop thru each platform and add each platform the player touches to collide_arr
     for (int i = 0; i < num_platforms; i++)
     {
-        if (this->collides_with_platform(platforms[i]))
+        output.clear();
+        output = collides_with_platform(platforms[i]);
+        if (!output.empty())
         {
-            collide_arr.push_back(platforms[i]);
+            for (Vector2 point : output)
+            {
+                if (point.x == this->point_1.x && point.y == this->point_1.y)
+                {
+                    collide_arr.push_back(1);
+                }
+                if (point.x == this->point_2.x && point.y == this->point_2.y)
+                {
+                    collide_arr.push_back(2);
+                }
+                if (point.x == this->point_3.x && point.y == this->point_3.y)
+                {
+                    collide_arr.push_back(3);
+                }
+                if (point.x == this->point_4.x && point.y == this->point_4.y)
+                {
+                    collide_arr.push_back(4);
+                }
+                if (point.x == this->point_5.x && point.y == this->point_5.y)
+                {
+                    collide_arr.push_back(5);
+                }
+                if (point.x == this->point_6.x && point.y == this->point_6.y)
+                {
+                    collide_arr.push_back(6);
+                }
+                if (point.x == this->point_7.x && point.y == this->point_7.y)
+                {
+                    collide_arr.push_back(7);
+                }
+                if (point.x == this->point_8.x && point.y == this->point_8.y)
+                {
+                    collide_arr.push_back(8);
+                }
+                if (point.x == this->point_9.x && point.y == this->point_9.y)
+                {
+                    collide_arr.push_back(9);
+                }
+            }
         }
     }
 
