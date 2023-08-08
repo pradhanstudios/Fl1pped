@@ -120,7 +120,7 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
             case 4:
                 this->acceleration.x = ACCELERATION;
             case 6:
-                this->acceleration.x = -ACCELERATION;
+                this->acceleration.x = ACCELERATION;
             case 8:
                 this->velocity.y = -1;
             }
