@@ -25,6 +25,7 @@ private:
     // Texture2D skin;
     // bool can_jump;
     std::vector<Vector2> collision_points;
+    int collided_points[9];
     Vector2 point_1;
     Vector2 point_2;
     Vector2 point_3;
@@ -50,8 +51,8 @@ public:
     void move(Platform plat);
     void move(std::vector<Platform> platforms, int num_platforms);
     void jump();
-    std::vector<Vector2> collides_with_platform(Platform platform);
+    void collides_with_platform(Platform platform);
     // Platform collides_with_platform(Platform *platforms, int num_platforms);
-    std::vector<int> collides_with_platform(std::vector<Platform> platforms, int num_platforms);
+    void collides_with_platform(std::vector<Platform> platforms, int num_platforms);
     void set_position(Vector2 position);
 };
