@@ -106,22 +106,32 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     if (collision)
     {
         int collide_len = collide_points.size();
+
         // debug
         // fprintf(stderr, "plat-y: %f\tplayer-y: %f\n", collide_plat.get_position().y, this->rect.y + this->rect.height);
 
-        // collide floor (if moving down)
+        // loop thru collided points
         for (int i = 0; i < collide_len; i++)
         {
             // check middles
-            switch (collide_points[i])
+
+            // left and right
+            if (collide_points[i] == 4)
             {
-            case 2:
-                this->velocity.y = 1;
-            case 4:
                 this->acceleration.x = ACCELERATION;
-            case 6:
+            }
+            if (collide_points[i] == 6)
+            {
                 this->acceleration.x = -ACCELERATION;
-            case 8:
+            }
+
+            // top and bot
+            if (collide_points[i] == 2)
+            {
+                this->velocity.y = 1;
+            }
+            if (collide_points[i] == 8)
+            {
                 this->velocity.y = -1;
             }
         }
@@ -220,19 +230,6 @@ std::vector<Vector2> Player::collides_with_platform(Platform plat)
     }
     return collided_points;
 }
-
-// Platform Player::collides_with_platform(Platform *platforms, int num_platforms)
-// {
-//     // loop thru each platform and return whichever platform the player touches
-//     for (int i = 0; i < num_platforms; i++)
-//     {
-//         if (this->collides_with_platform(platforms[i]))
-//         {
-//             return platforms[i];
-//         }
-//     }
-//     return Platform(Vector2{0.0, 0.0}, Vector2{0.0, 0.0}, BLANK);
-// }
 
 std::vector<int> Player::collides_with_platform(std::vector<Platform> platforms, int num_platforms)
 {
