@@ -126,21 +126,21 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     if (collision)
     {
         // left and right midpoints
-        if (this->collided_points[3])
+        if ((this->collided_points[3]) || (this->collided_points[0] && this->collided_points[3]) || (this->collided_points[3] && this->collided_points[6]))
         {
             this->acceleration.x = ACCELERATION;
         }
-        if (this->collided_points[5])
+        if ((this->collided_points[5]) || (this->collided_points[2] && this->collided_points[5]) || (this->collided_points[5] && this->collided_points[8]))
         {
             this->acceleration.x = -ACCELERATION;
         }
 
         // top and bot midpoints
-        if (this->collided_points[1])
+        if ((this->collided_points[1]) || (this->collided_points[0] && this->collided_points[1]) || (this->collided_points[1] && this->collided_points[2]))
         {
             this->velocity.y = 1;
         }
-        if (this->collided_points[7])
+        if ((this->collided_points[7]) || (this->collided_points[6] && this->collided_points[7]) || (this->collided_points[7] && this->collided_points[8]))
         {
             this->velocity.y = -1;
         }
