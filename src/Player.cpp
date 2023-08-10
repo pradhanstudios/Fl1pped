@@ -28,6 +28,14 @@ void Player::update_collision_points()
     this->point_7 = (Vector2){this->rect.x, this->rect.y + this->rect.height};                            // bottom left
     this->point_8 = (Vector2){this->rect.x + this->rect.width / 2, this->rect.y + this->rect.height};     // bottom middle
     this->point_9 = (Vector2){this->rect.x + this->rect.width, this->rect.y + this->rect.height};         // bottom right
+    this->thresh_point_1 = (Vector2){point_1.x + 0.05, point_1.y};
+    this->thresh_point_2 = (Vector2){point_1.x, point_1.y + 0.05};
+    this->thresh_point_3 = (Vector2){point_3.x - 0.05, point_3.y};
+    this->thresh_point_4 = (Vector2){point_3.x, point_3.y + 0.05};
+    this->thresh_point_5 = (Vector2){point_7.x + 0.05, point_7.y};
+    this->thresh_point_6 = (Vector2){point_7.x, point_7.y - 0.05};
+    this->thresh_point_7 = (Vector2){point_9.x - 0.05, point_9.y};
+    this->thresh_point_8 = (Vector2){point_9.x, point_9.y - 0.05};
 
     this->collision_points.push_back(this->point_1);
     this->collision_points.push_back(this->point_2);
@@ -38,8 +46,16 @@ void Player::update_collision_points()
     this->collision_points.push_back(this->point_7);
     this->collision_points.push_back(this->point_8);
     this->collision_points.push_back(this->point_9);
+    this->collision_points.push_back(this->thresh_point_1);
+    this->collision_points.push_back(this->thresh_point_2);
+    this->collision_points.push_back(this->thresh_point_3);
+    this->collision_points.push_back(this->thresh_point_4);
+    this->collision_points.push_back(this->thresh_point_5);
+    this->collision_points.push_back(this->thresh_point_6);
+    this->collision_points.push_back(this->thresh_point_7);
+    this->collision_points.push_back(this->thresh_point_8);
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 17; i++)
     {
         this->collided_points[i] = 0;
     }
@@ -126,21 +142,21 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     if (collision)
     {
         // left and right midpoints
-        if ((this->collided_points[3]) || (this->collided_points[0] && this->collided_points[3]) || (this->collided_points[3] && this->collided_points[6]))
+        if ((this->collided_points[3]) || (this->collided_points[0] && this->collided_points[2 + 8]) || (this->collided_points[6] && this->collided_points[5 + 8]))
         {
             this->acceleration.x = ACCELERATION;
         }
-        if ((this->collided_points[5]) || (this->collided_points[2] && this->collided_points[5]) || (this->collided_points[5] && this->collided_points[8]))
+        if ((this->collided_points[5]) || (this->collided_points[2] && this->collided_points[4 + 8]) || (this->collided_points[8] && this->collided_points[8 + 8]))
         {
             this->acceleration.x = -ACCELERATION;
         }
 
         // top and bot midpoints
-        if ((this->collided_points[1]) || (this->collided_points[0] && this->collided_points[1]) || (this->collided_points[1] && this->collided_points[2]))
+        if ((this->collided_points[1]) || (this->collided_points[0] && this->collided_points[1 + 8]) || (this->collided_points[2] && this->collided_points[3 + 8]))
         {
             this->velocity.y = 1;
         }
-        if ((this->collided_points[7]) || (this->collided_points[6] && this->collided_points[7]) || (this->collided_points[7] && this->collided_points[8]))
+        if ((this->collided_points[7]) || (this->collided_points[6] && this->collided_points[6 + 8]) || (this->collided_points[8] && this->collided_points[7 + 8]))
         {
             this->velocity.y = -1;
         }
@@ -148,7 +164,8 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     // }
 
     // jump
-    if (IsKeyDown(up) && (this->collided_points[6] || this->collided_points[7] || this->collided_points[8]))
+    bool bot_col = (this->collided_points[7]) || (this->collided_points[6] && this->collided_points[6 + 8]) || (this->collided_points[8] && this->collided_points[7 + 8]);
+    if (IsKeyDown(up) && bot_col)
     {
         this->jump();
     }

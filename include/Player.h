@@ -25,7 +25,7 @@ private:
     // Texture2D skin;
     // bool can_jump;
     std::vector<Vector2> collision_points;
-    int collided_points[9];
+    int collided_points[17];
     Vector2 point_1;
     Vector2 point_2;
     Vector2 point_3;
@@ -35,6 +35,14 @@ private:
     Vector2 point_7;
     Vector2 point_8;
     Vector2 point_9;
+    Vector2 thresh_point_1;
+    Vector2 thresh_point_2;
+    Vector2 thresh_point_3;
+    Vector2 thresh_point_4;
+    Vector2 thresh_point_5;
+    Vector2 thresh_point_6;
+    Vector2 thresh_point_7;
+    Vector2 thresh_point_8;
 
 public:
     Player(Vector2 position, Vector2 size, Color skin, int controls[3]);
