@@ -15,7 +15,7 @@ Player::Player(Vector2 position, Vector2 size, Color skin, int controls[3])
 void Player::update_collision_points()
 {
     this->collision_points.clear();
-    // left is less than right
+    // 0,0 is top left
     this->collision_points.push_back((Vector2){this->rect.x, this->rect.y});                                                // top left
     this->collision_points.push_back((Vector2{this->rect.x + this->rect.width / 2, this->rect.y}));                         // top middle
     this->collision_points.push_back((Vector2{this->rect.x + this->rect.width, this->rect.y}));                             // top right
@@ -58,8 +58,10 @@ void Player::draw_player()
     DrawRectangleRec(this->rect, this->skin);
     // debug
     this->update_collision_points();
+    fprintf(stderr, "\n");
     for (Vector2 pos : this->collision_points)
     {
+        fprintf(stderr, "point: %f, %f\n", pos.x, pos.y);
         DrawPixelV(pos, RED);
     }
 }

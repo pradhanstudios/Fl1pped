@@ -30,7 +30,7 @@ void Scene::load_scene()
 
     while (std::getline(fh, text))
     {
-        std::cout << text << std::endl;
+        // std::cout << text << std::endl;
         args = this->tokenizer(text, ',');
         if (args.size() > 2)
         {
