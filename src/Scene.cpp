@@ -34,16 +34,16 @@ void Scene::load_scene()
         args = this->tokenizer(text, ',');
         if (args.size() > 2)
         {
-            this->platforms.push_back(Platform((Vector2){std::stod(args[0]), std::stod(args[1])}, (Vector2){std::stod(args[2]), std::stod(args[3])}, (std::stoi(args[4]) ? MAROON : GREEN)));
+            this->platforms.push_back(Platform((Vector2){std::stof(args[0]), std::stof(args[1])}, (Vector2){std::stof(args[2]), std::stof(args[3])}, (std::stof(args[4]) ? MAROON : GREEN)));
         }
         else
         {
             switch (line)
             {
             case 1:
-                player1->set_position((Vector2){std::stod(args[0]), std::stod(args[1])});
+                player1->set_position((Vector2){std::stof(args[0]), std::stof(args[1])});
             case 2:
-                player2->set_position((Vector2){std::stod(args[0]), std::stod(args[1])});
+                player2->set_position((Vector2){std::stof(args[0]), std::stof(args[1])});
             }
             line++;
         }
