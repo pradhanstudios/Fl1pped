@@ -1,9 +1,9 @@
 #include "Scene.h"
 
-Scene::Scene(char scene_id, Player *player1, Player *player2)
+Scene::Scene(std::string scene_id, Player *player1, Player *player2)
 {
     this->scene_id = scene_id;
-    this->scene_filename = (TextFormat("../assets/scenes/scene_%c.txt", this->scene_id));
+    this->scene_filename = ("../assets/scenes/%s.txt", scene_id);
     // fprintf(stderr, "../assets/scenes/scene_%c.txt \n", this->scene_id);
     this->player1 = player1;
     this->player2 = player2;
