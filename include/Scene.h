@@ -11,14 +11,13 @@
 class Scene
 {
 private:
-    std::string scene_id;
     std::string scene_filename;
     std::vector<Platform> platforms;
     Player *player1;
     Player *player2;
 
 public:
-    Scene(std::string scene_id, Player *player1, Player *player2);
+    Scene(char scene_id1, char scene_id2, Player *player1, Player *player2);
     std::vector<std::string> tokenizer(std::string word, char del);
     void load_scene();
     std::vector<Platform> get_platforms();

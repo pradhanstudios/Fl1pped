@@ -23,7 +23,7 @@ int main(void)
     Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, DARKGREEN, player_two_controls, 1);
 
     // initialize platforms
-    Scene level_0 = Scene("scene_0", &player_one, &player_two);
+    Scene level_0 = Scene('0', '0', &player_one, &player_two);
     level_0.load_scene();
 
     // list of platforms
