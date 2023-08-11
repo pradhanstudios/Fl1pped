@@ -198,14 +198,14 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     this->rect.y += this->velocity.y + (0.5 * this->acceleration.y);
 
     // vertical screen warp
-    if (this->rect.y > GetScreenHeight())
-    {
-        this->rect.y = 0;
-    }
-    if (this->rect.y < 0)
-    {
-        this->rect.y = GetScreenHeight();
-    }
+    // if (this->rect.y > GetScreenHeight())
+    // {
+    //     this->rect.y = 0;
+    // }
+    // if (this->rect.y < 0)
+    // {
+    //     this->rect.y = GetScreenHeight();
+    // }
 }
 
 void Player::jump()
