@@ -1,10 +1,18 @@
 #include "Player.h"
 
-Player::Player(Vector2 position, Vector2 size, Color skin, int controls[3])
+Player::Player(Vector2 position, Vector2 size, Color skin, int controls[3], int dir)
 {
     this->velocity = (Vector2){0.0, 0.0};
     this->acceleration.x = 0;
-    this->acceleration.y = GRAVITY;
+    this->dir = dir;
+    if (dir)
+    {
+        this->acceleration.y = GRAVITY;
+    }
+    else
+    {
+        this->acceleration.y = -GRAVITY;
+    }
     this->rect = Rectangle{position.x, position.y, size.x, size.y};
     this->skin = skin;
     this->up = controls[0];
@@ -111,7 +119,14 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
 {
     // set acceleration values
     this->acceleration.x = 0;
-    this->acceleration.y = GRAVITY;
+    if (this->dir)
+    {
+        this->acceleration.y = GRAVITY;
+    }
+    else
+    {
+        this->acceleration.y = -GRAVITY;
+    }
 
     // player movement
     if (IsKeyDown(right))
@@ -165,7 +180,12 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
 
     // jump
     bool bot_col = (this->collided_points[7]) || (this->collided_points[6] && this->collided_points[6 + 8]) || (this->collided_points[8] && this->collided_points[7 + 8]);
-    if (IsKeyDown(up) && bot_col)
+    bool top_col = (this->collided_points[1]) || (this->collided_points[0] && this->collided_points[0 + 10]) || (this->collided_points[2] && this->collided_points[2 + 10]);
+    if (IsKeyDown(up) && this->dir && bot_col)
+    {
+        this->jump();
+    }
+    if (IsKeyDown(up) && this->dir == 0 && top_col)
     {
         this->jump();
     }
@@ -190,7 +210,14 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
 
 void Player::jump()
 {
-    this->velocity.y = -10;
+    if (this->dir)
+    {
+        this->velocity.y = -10;
+    }
+    else
+    {
+        this->velocity.y = 10;
+    }
 }
 
 void Player::collides_with_platform(Platform plat)
