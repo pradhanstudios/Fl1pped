@@ -9,7 +9,8 @@
 
 #define FRICTION (double)-0.12;
 #define GRAVITY (double)0.5;
-#define ACCELERATION (double)0.5;
+#define ACCELERATION (double)1.0;
+#define JUMP (double)10.0
 
 class Player
 {

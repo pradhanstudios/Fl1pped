@@ -212,11 +212,11 @@ void Player::jump()
 {
     if (this->dir)
     {
-        this->velocity.y = -10;
+        this->velocity.y = -JUMP;
     }
     else
     {
-        this->velocity.y = 10;
+        this->velocity.y = JUMP;
     }
 }
 

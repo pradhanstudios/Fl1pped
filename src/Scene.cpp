@@ -29,6 +29,12 @@ void Scene::load_scene()
 
     while (std::getline(fh, text))
     {
+
+        if (text[0] == '/')
+        {
+            continue;
+        }
+
         // std::cout << text << std::endl;
         args = this->tokenizer(text, ',');
         if (args.size() > 2)
