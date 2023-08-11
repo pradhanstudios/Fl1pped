@@ -19,8 +19,8 @@ int main(void)
     // initialize players
     int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
     int player_two_controls[3] = {KEY_UP, KEY_RIGHT, KEY_LEFT};
-    Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON, player_one_controls, 0);
-    Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, DARKGREEN, player_two_controls, 1);
+    Player player_one = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, MAROON, player_one_controls, 1);
+    Player player_two = Player((Vector2){(screen_width / 2), (screen_height / 2)}, (Vector2){30, 80}, DARKGREEN, player_two_controls, 0);
 
     // initialize platforms
     Scene level_0 = Scene('0', '1', &player_one, &player_two);
