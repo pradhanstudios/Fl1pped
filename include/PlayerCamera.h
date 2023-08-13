@@ -21,4 +21,5 @@ public:
     void stop_camera();
     void zoom_in();
     void zoom_out();
+    void reset_zoom();
 };

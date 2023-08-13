@@ -68,6 +68,12 @@ int main(void)
             camera2.zoom_in();
         }
 
+        if (IsKeyReleased(KEY_ZERO))
+        {
+            camera1.reset_zoom();
+            camera2.reset_zoom();
+        }
+
         // update camera
         camera1.target_player();
         camera2.target_player();

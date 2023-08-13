@@ -36,3 +36,8 @@ void PlayerCamera::zoom_out()
 {
     camera.zoom += 0.1;
 }
+
+void PlayerCamera::reset_zoom()
+{
+    camera.zoom = 1.0;
+}
