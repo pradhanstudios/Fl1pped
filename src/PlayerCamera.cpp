@@ -28,3 +28,11 @@ void PlayerCamera::stop_camera()
 {
     EndMode2D();
 }
+void PlayerCamera::zoom_in()
+{
+    camera.zoom -= 0.1;
+}
+void PlayerCamera::zoom_out()
+{
+    camera.zoom += 0.1;
+}

@@ -57,6 +57,17 @@ int main(void)
         player_two.update(platforms, num_platforms);
         // fprintf(stderr, "p1: %f, %f p2: %f, %f \n", player_one.get_position().x, player_one.get_position().y, player_two.get_position().x, player_two.get_position().y);
 
+        if (IsKeyReleased(KEY_EQUAL))
+        {
+            camera1.zoom_out();
+            camera2.zoom_out();
+        }
+        if (IsKeyReleased(KEY_MINUS))
+        {
+            camera1.zoom_in();
+            camera2.zoom_in();
+        }
+
         // update camera
         camera1.target_player();
         camera2.target_player();
