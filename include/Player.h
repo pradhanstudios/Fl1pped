@@ -65,4 +65,5 @@ public:
     // Platform collides_with_platform(Platform *platforms, int num_platforms);
     void collides_with_platform(std::vector<Platform> platforms, int num_platforms);
     void set_position(Vector2 position);
+    int get_dir() { return this->dir; };
 };
