@@ -19,4 +19,6 @@ public:
     void start_camera();
     void target_player();
     void stop_camera();
+    void zoom_in();
+    void zoom_out();
 };
