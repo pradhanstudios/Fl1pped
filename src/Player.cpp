@@ -99,10 +99,10 @@ void Player::draw_player()
     // DrawTextureV(this->position, this->size, this->skin);
     DrawRectangleRec(this->rect, this->skin);
     // debug
-    for (Vector2 pos : this->collision_points)
-    {
-        DrawPixelV(pos, RED);
-    }
+    // for (Vector2 pos : this->collision_points)
+    // {
+    //     DrawPixelV(pos, RED);
+    // }
 }
 
 void Player::update(std::vector<Platform> platforms, int num_platforms)

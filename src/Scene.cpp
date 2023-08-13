@@ -26,6 +26,7 @@ void Scene::load_scene()
     std::ifstream fh(this->scene_filename);
     std::vector<std::string> args;
     int line = 1;
+    Color plat_colors[2] = {GREEN, BLUE};
 
     while (std::getline(fh, text))
     {
@@ -39,7 +40,7 @@ void Scene::load_scene()
         args = this->tokenizer(text, ',');
         if (args.size() > 2)
         {
-            this->platforms.push_back(Platform((Vector2){std::stof(args[0]), std::stof(args[1])}, (Vector2){std::stof(args[2]), std::stof(args[3])}, (std::stof(args[4]) ? MAROON : GREEN)));
+            this->platforms.push_back(Platform((Vector2){std::stof(args[0]), std::stof(args[1])}, (Vector2){std::stof(args[2]), std::stof(args[3])}, plat_colors[(std::stoi(args[4]))]));
         }
         else
         {
