@@ -38,7 +38,7 @@ void Scene::load_scene()
 
         // std::cout << text << std::endl;
         args = this->tokenizer(text, ',');
-        if (args.size() > 2)
+        if (args.size() > 3)
         {
             for (std::string s : args)
             {
@@ -66,8 +66,10 @@ void Scene::load_scene()
             {
             case 1:
                 player1->set_position((Vector2){std::stof(args[0]), std::stof(args[1])});
+                // player1->set_dir(std::stoi(args[2]));
             case 2:
                 player2->set_position((Vector2){std::stof(args[0]), std::stof(args[1])});
+                // player2->set_dir(std::stoi(args[2]));
             }
             line++;
         }

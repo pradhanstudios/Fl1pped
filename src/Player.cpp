@@ -255,3 +255,15 @@ void Player::set_top_screen_warp(int arg)
 {
     this->top_screen_warp = arg;
 }
+void Player::set_dir(int direction)
+{
+    this->dir = direction;
+    if (this->dir)
+    {
+        this->acceleration.y = GRAVITY;
+    }
+    else
+    {
+        this->acceleration.y = -GRAVITY;
+    }
+}

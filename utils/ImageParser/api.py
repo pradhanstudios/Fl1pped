@@ -4,13 +4,16 @@ from PIL import Image
 def find_all(COLOR, img):
     pixel_map = img.load()
     pixels = []
+    # print(pixels)
     for i in range(img.size[0]):
         for j in range(img.size[1]):
-            if (pixel_map[i, j] == COLOR):
-                # print(f"NOT WHITE: {i}, {j}; COLOR: {pixel_map[i, j]}")
+            if pixel_map[i, j] == COLOR:
                 pixels.append((i, j))
-
-    return pixels
+                    
+    if pixels:
+        return pixels
+    else:
+        return [(None, None)]
 
 # convert  RGB value to RGBA
 def RGB_to_RGBA(COLOR):

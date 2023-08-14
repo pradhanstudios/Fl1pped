@@ -70,4 +70,5 @@ public:
     int get_dir() { return this->dir; };
     void set_bot_screen_warp(int arg);
     void set_top_screen_warp(int arg);
+    void set_dir(int direction);
 };
