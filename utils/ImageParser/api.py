@@ -14,10 +14,3 @@ def find_all(COLOR, img):
 def RGB_to_RGBA(COLOR):
     newimg = Image.new("RGB", (1, 1), COLOR).convert("RGBA")
     return newimg.load()[0, 0]
-
-def in_list(value, l):
-    try:
-        val = l.index(value)
-        return l[val]
-    except ValueError:
-        return False
