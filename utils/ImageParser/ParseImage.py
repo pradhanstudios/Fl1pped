@@ -2,9 +2,12 @@ import cv2
 import numpy as np
 from PIL import Image
 import api
+import sys
 
-img = cv2.imread('level1concept.jpg')
-p_img = Image.open("level1concept.jpg")
+filename = sys.argv[1]
+
+img = cv2.imread(filename)
+p_img = Image.open(filename)
 pixel_map = p_img.load()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
