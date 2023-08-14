@@ -18,9 +18,9 @@ blue_pixels = api.find_all(BLUE, img)
 for corner in black_pixels:
     x, y = corner
     color = api.RGB_to_RGBA(pixel_map[x+1, y])
-    while (x, y) in red_pixels:
+    while (x, y) not in red_pixels:
         x += 1
-    while (x, y) in blue_pixels:
+    while (x, y) not in blue_pixels:
         y += 1
     arguments.append((corner[0], corner[1], x, y, color[0], color[1], color[2], color[3]))
 
