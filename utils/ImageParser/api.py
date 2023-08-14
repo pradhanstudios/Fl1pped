@@ -1,5 +1,6 @@
 from PIL import Image
 
+# find all pixels of a certain color
 def find_all(COLOR, img):
     pixel_map = img.load()
     pixels = []
@@ -11,6 +12,7 @@ def find_all(COLOR, img):
 
     return pixels
 
+# convert  RGB value to RGBA
 def RGB_to_RGBA(COLOR):
     newimg = Image.new("RGB", (1, 1), COLOR).convert("RGBA")
     return newimg.load()[0, 0]
