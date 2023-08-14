@@ -1,57 +1,45 @@
+import cv2
+import numpy as np
 from PIL import Image
 import api
-# define constants
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
-MAGENTA = (255, 0, 255) # player 1 pos
-PURPLE = (128, 0, 128) # player 2 pos
-# define color and arguments for later
-color = ()
-arguments = []
 
-#image stuff
-img = Image.open("test.png").convert("RGB") # convert to RGB for easier use
-pixel_map = img.load() # all RGB values of pixels
+img = cv2.imread('level1concept.jpg')
+p_img = Image.open("level1concept.jpg")
+pixel_map = p_img.load()
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# get pixels
+ret,thresh = cv2.threshold(gray,50,255,0)
+contours,hierarchy = cv2.findContours(thresh, 1, 2)
+# print("Number of contours detected:", len(contours))
+args = []
 
-black_pixels = api.find_all(BLACK, img) # top left
-blue_pixels = api.find_all(BLUE, img) # top right
-red_pixels = api.find_all(RED, img) # bottom right
-white_pixels = api.find_all(WHITE, img)
-magenta_pixel = api.find_all(MAGENTA, img) # player 1 pos
-purple_pixel = api.find_all(PURPLE, img) # player 2 pos
+width, height = p_img.size
 
-arguments.append((magenta_pixel[0][0], magenta_pixel[0][1])) # player 1 pos
-arguments.append((purple_pixel[0][0], purple_pixel[0][1])) # player 2 pos
-
-
-for corner in black_pixels:
-    x, y = corner
-    color = api.RGB_to_RGBA(pixel_map[x+1, y]) # get the next pixel to the right of the top left to get the color of the rectangle
-    while (x, y) not in red_pixels: # top left to top right
-        x += 1
-    while (x, y) not in blue_pixels: # top right to bottom right
-        y += 1
-    # top_left.x, top_left.y, bottom_right.x, bottom_right.y {RGBA} values
-    arguments.append((corner[0], corner[1], x, y, color[0], color[1], color[2], color[3]))
-
-# print arguments
-for args in arguments:
-    for arg in args:
-        if arg:
-            print(arg, end=", ")
-    print("\n")
+for cnt in contours:
+   x1,y1 = cnt[0][0]
+   approx = cv2.approxPolyDP(cnt, 0.01*cv2.arcLength(cnt, True), True)
+   if len(approx) == 4:
+        x, y, w, h = cv2.boundingRect(cnt)
+        # print(cnt)
+        ratio = float(w)/h
+        color = api.RGB_to_RGBA(pixel_map[x, y])
+        if not (not (w > 5 and h > 5) or width in [x, y, x+w, y+h, color[0], color[1], color[2], color[3]] or height in [x, y, x+w, y+h, color[0], color[1], color[2], color[3]]):
+            args.append([x, y, x+w, y+h, color[0], color[1], color[2], color[3]])
+            print([w, h])
+            img = cv2.drawContours(img, [cnt], -1, (0,255,0), 3)
     
+        #   print(color)
+        # print([w, h])
 
+        
 
+for arguments in args:
+    for arg in arguments:
+        print(arg, end=", ")
 
+    print("\n")
+      
 
-
-
-
-
-
-
+cv2.imshow("level_with_parsing", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
