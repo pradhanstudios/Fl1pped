@@ -197,15 +197,14 @@ void Player::move(std::vector<Platform> platforms, int num_platforms)
     this->rect.x += this->velocity.x + (0.5 * this->acceleration.x);
     this->rect.y += this->velocity.y + (0.5 * this->acceleration.y);
 
-    // vertical screen warp
-    // if (this->rect.y > GetScreenHeight())
-    // {
-    //     this->rect.y = 0;
-    // }
-    // if (this->rect.y < 0)
-    // {
-    //     this->rect.y = GetScreenHeight();
-    // }
+    if (this->rect.y > this->top_screen_warp)
+    {
+        this->rect.y = 0;
+    }
+    if (this->rect.y < this->bot_screen_warp)
+    {
+        this->rect.y = GetScreenHeight();
+    }
 }
 
 void Player::jump()
@@ -247,4 +246,12 @@ void Player::set_position(Vector2 position)
 {
     this->rect.x = position.x;
     this->rect.y = position.y;
+}
+void Player::set_bot_screen_warp(int arg)
+{
+    this->bot_screen_warp = arg;
+}
+void Player::set_top_screen_warp(int arg)
+{
+    this->top_screen_warp = arg;
 }

@@ -24,6 +24,8 @@ private:
     int left;
     int right;
     int dir;
+    int bot_screen_warp;
+    int top_screen_warp;
     // Texture2D skin;
     // bool can_jump;
     std::vector<Vector2> collision_points;
@@ -66,4 +68,6 @@ public:
     void collides_with_platform(std::vector<Platform> platforms, int num_platforms);
     void set_position(Vector2 position);
     int get_dir() { return this->dir; };
+    void set_bot_screen_warp(int arg);
+    void set_top_screen_warp(int arg);
 };

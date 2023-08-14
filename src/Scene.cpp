@@ -40,7 +40,25 @@ void Scene::load_scene()
         args = this->tokenizer(text, ',');
         if (args.size() > 2)
         {
-            this->platforms.push_back(Platform((Vector2){std::stof(args[0]), std::stof(args[1])}, (Vector2){std::stof(args[2]), std::stof(args[3])}, plat_colors[(std::stoi(args[4]))]));
+            for (std::string s : args)
+            {
+                std::cerr << s << std::endl;
+            }
+            // fprintf(stderr, "%s", args); //%f, %f, %f \n", std::stoi(args[4]), std::stoi(args[5]), std::stoi(args[6]), std::stoi(args[7]));
+            this->platforms.push_back(Platform((Vector2){std::stof(args[0]), std::stof(args[1])}, (Vector2){std::stof(args[2]) - std::stof(args[0]), std::stof(args[3]) - std::stof(args[1])}, (Color){std::stoi(args[4]), std::stoi(args[5]), std::stoi(args[6]), std::stoi(args[7])}));
+        }
+        else if (args.size() == 1)
+        {
+            switch (line)
+            {
+            case 1:
+                player1->set_bot_screen_warp(std::stoi(args[0]));
+                player2->set_bot_screen_warp(std::stoi(args[0]));
+                line++;
+            case 2:
+                player2->set_top_screen_warp(std::stoi(args[0]));
+                player1->set_top_screen_warp(std::stoi(args[0]));
+            };
         }
         else
         {
