@@ -91,7 +91,7 @@ int main(void)
         screenPlayer1.start();
         camera1.start_camera();
         // refresh background
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         // draw ground
         for (Platform plat : platforms)
         {
@@ -106,7 +106,7 @@ int main(void)
         screenPlayer2.start();
         camera2.start_camera();
         // refresh background
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         // draw ground
         for (Platform plat : platforms)
         {
@@ -119,7 +119,7 @@ int main(void)
         screenPlayer2.end();
 
         BeginDrawing();
-        ClearBackground(BLACK);
+        ClearBackground(RAYWHITE);
         screenPlayer1.combine(screenPlayer2.get_texture());
         // DrawLineV({screen_width / 2, 0.0}, {screen_width / 2, screen_height}, BLACK);
         EndDrawing();

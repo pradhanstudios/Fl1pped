@@ -35,13 +35,15 @@ for cnt in contours:
         # print([w, h])
 
         
+with open(f"{filename}_converted.txt", "w") as fh:
+    for arguments in args:
+        for arg in arguments:
+            print(arg, end=", ")
+            fh.write(f"{arg}, ")
 
-for arguments in args:
-    for arg in arguments:
-        print(arg, end=", ")
-
-    print("\n")
-      
+        print("\n")
+        fh.write("\n")
+        
 
 cv2.imshow("level_with_parsing", img)
 cv2.waitKey(0)
