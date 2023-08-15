@@ -124,6 +124,8 @@ Blob::Blob(Vector2 position, Vector2 size, Color skin, int dir)
     this->velocity = (Vector2){0.0, 0.0};
     this->acceleration.x = 0;
     this->dir = dir;
+    this->movement_direction = 1;
+    fprintf(stderr, "%i", movement_direction);
     if (dir)
     {
         this->acceleration.y = GRAVITY;
@@ -133,6 +135,8 @@ Blob::Blob(Vector2 position, Vector2 size, Color skin, int dir)
         this->acceleration.y = -GRAVITY;
     }
     this->rect = Rectangle{position.x, position.y, size.x, size.y};
+    rect.x = position.x;
+    rect.y = position.y;
     this->skin = skin;
 
     this->update_collision_points();
@@ -141,8 +145,15 @@ Blob::Blob(Vector2 position, Vector2 size, Color skin, int dir)
 void Blob::move(std::vector<Platform> platforms, int num_platforms)
 {
     this->collides_with_platform(platforms, num_platforms);
-    int right = 0;
     this->acceleration.x = 0;
+    if (this->movement_direction)
+    {
+        this->acceleration.x = -ACCELERATION;
+    }
+    else
+    {
+        this->acceleration.x = ACCELERATION;
+    }
     if (this->dir)
     {
         this->acceleration.y = GRAVITY;
@@ -151,15 +162,20 @@ void Blob::move(std::vector<Platform> platforms, int num_platforms)
     {
         this->acceleration.y = -GRAVITY;
     }
-    if (right)
+    if (!this->collided_points[6] && !this->collided_points[7] && !this->collided_points[8])
+    {
+        this->acceleration.x = 0;
+        this->velocity.x = 0;
+    }
+    if (!this->collided_points[8])
     {
         this->acceleration.x = -ACCELERATION;
-        right = (!this->collided_points[8]) ? 0 : 1;
-        }
-    else
+        this->movement_direction = 1;
+    }
+    if (!this->collided_points[6])
     {
         this->acceleration.x = ACCELERATION;
-        right = (!this->collided_points[6]) ? 1 : 0;
+        this->movement_direction = 0;
     }
     if (collided_points[7])
     {

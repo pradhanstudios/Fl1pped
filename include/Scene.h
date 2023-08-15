@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Platform.h"
 #include "Player.h"
+#include "Enemy.h"
 
 #include <vector>
 #include <fstream>
@@ -13,6 +14,7 @@ class Scene
 private:
     std::string scene_filename;
     std::vector<Platform> platforms;
+
     Player *player1;
     Player *player2;
 

@@ -37,6 +37,7 @@ protected:
     Vector2 thresh_point_6;
     Vector2 thresh_point_7;
     Vector2 thresh_point_8;
+    int movement_direction;
 
 public:
     Enemy();

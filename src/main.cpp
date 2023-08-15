@@ -19,10 +19,12 @@ int main(void)
 
     // enemies
     // Blob bob = Blob()
-    Blob bob = Blob((Vector2){1200.0, 600.0},
-                    (Vector2){30, 30},
-                    BLUE,
-                    0);
+    std::vector<Enemy *> enemies;
+    Blob bob = (Blob((Vector2){600.0, 0.0},
+                     (Vector2){30, 30},
+                     BLUE,
+                     1));
+    enemies.push_back(&bob);
 
     // initialize players
     int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
@@ -64,7 +66,11 @@ int main(void)
         player_one.update(platforms, num_platforms);
         player_two.update(platforms, num_platforms);
 
-        bob.update(platforms, num_platforms);
+        for (int i = 0; i < enemies.size(); i++)
+        {
+            // fprintf(stderr, "updating \n");
+            enemies[i]->update(platforms, num_platforms);
+        }
         // fprintf(stderr, "p1: %f, %f p2: %f, %f \n", player_one.get_position().x, player_one.get_position().y, player_two.get_position().x, player_two.get_position().y);
 
         if (IsKeyReleased(KEY_EQUAL))
@@ -92,6 +98,7 @@ int main(void)
         // update camera
         camera1.target_player();
         camera2.target_player();
+        // fprintf(stderr, "pos: %f, %f \n", bob.get_position().x, bob.get_position().y);
 
         // debug
         // printf("pos: (%f, %f)\n", player_one.get_position().x, player_one.get_position().y);
@@ -112,7 +119,11 @@ int main(void)
         {
             plat.draw_tile();
         }
-        bob.draw_enemy();
+        for (int i = 0; i < enemies.size(); i++)
+        {
+            // fprintf(stderr, "updating \n");
+            enemies[i]->draw_enemy();
+        }
         // draw player
         player_one.draw_player();
         player_two.draw_player();
@@ -128,7 +139,11 @@ int main(void)
         {
             plat.draw_tile();
         }
-        bob.draw_enemy();
+        for (int i = 0; i < enemies.size(); i++)
+        {
+            // fprintf(stderr, "updating \n");
+            enemies[i]->draw_enemy();
+        }
         // draw player
         player_one.draw_player();
         player_two.draw_player();
