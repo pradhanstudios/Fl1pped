@@ -4,6 +4,7 @@
 #include "PlayerCamera.h"
 #include "Screen.h"
 #include "Scene.h"
+#include "Enemy.h"
 
 #include <stdio.h>
 
@@ -15,6 +16,13 @@ int main(void)
 
     // initialize window
     InitWindow(screen_width, screen_height, "Platformer");
+
+    // enemies
+    // Blob bob = Blob()
+    Blob bob = Blob((Vector2){1200.0, 600.0},
+                    (Vector2){30, 30},
+                    BLUE,
+                    0);
 
     // initialize players
     int player_one_controls[3] = {KEY_W, KEY_D, KEY_A}; // jump, right, and left controls
@@ -55,6 +63,8 @@ int main(void)
         // update player
         player_one.update(platforms, num_platforms);
         player_two.update(platforms, num_platforms);
+
+        bob.update(platforms, num_platforms);
         // fprintf(stderr, "p1: %f, %f p2: %f, %f \n", player_one.get_position().x, player_one.get_position().y, player_two.get_position().x, player_two.get_position().y);
 
         if (IsKeyReleased(KEY_EQUAL))
@@ -102,6 +112,7 @@ int main(void)
         {
             plat.draw_tile();
         }
+        bob.draw_enemy();
         // draw player
         player_one.draw_player();
         player_two.draw_player();
@@ -117,6 +128,7 @@ int main(void)
         {
             plat.draw_tile();
         }
+        bob.draw_enemy();
         // draw player
         player_one.draw_player();
         player_two.draw_player();
