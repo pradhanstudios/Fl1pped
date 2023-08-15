@@ -74,6 +74,11 @@ int main(void)
             camera2.reset_zoom();
         }
 
+        if (CheckCollisionRecs(player_one.get_body(), player_two.get_body()))
+        {
+            break;
+        }
+
         // update camera
         camera1.target_player();
         camera2.target_player();

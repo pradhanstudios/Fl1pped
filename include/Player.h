@@ -56,6 +56,7 @@ public:
     Vector2 get_velocity();
     Vector2 get_acceleration();
     Vector2 get_size();
+    Rectangle get_body();
     // bool get_jump();
     void draw_player();
     void update(Platform plat);

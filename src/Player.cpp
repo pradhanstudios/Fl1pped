@@ -267,3 +267,8 @@ void Player::set_dir(int direction)
         this->acceleration.y = -GRAVITY;
     }
 }
+
+Rectangle Player::get_body()
+{
+    return this->rect;
+}
