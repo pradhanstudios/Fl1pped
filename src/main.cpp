@@ -1,15 +1,12 @@
 #include "raylib.h"
+#include "config.hpp"
 
 int main() {
-
-    const int screen_width = 1200;
-    const int screen_height = 800;
-
     // init window
-    InitWindow(screen_width, screen_height, "Title");
+    InitWindow(WIDTH, HEIGHT, TITLE);
 
     // set fps
-    SetTargetFPS(60);
+    SetTargetFPS(FPS);
 
     // game loop
     while (!WindowShouldClose()) {
@@ -17,8 +14,8 @@ int main() {
 
         // draw
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
+
 
         EndDrawing();
     }
