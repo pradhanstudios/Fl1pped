@@ -4,13 +4,16 @@
 #include "raylib.h"
 #include "config.hpp"
 
+// Base class for all objects
 class Object {
     Rectangle rect;
     Color color;
-    int half_x, half_y;
+    int half_w, half_h;
 
     public:
         Object(int x, int y, int w, int h, Color color);
+
+        void update();
 
         inline void Draw_Color() {
             DrawRectangleRec(this->rect, this->color);
@@ -20,8 +23,16 @@ class Object {
             return this->rect.x;
         }
 
+        inline void set_x(int x) {
+            this->rect.x = x;
+        }
+
         inline int y() {
             return this->rect.y;
+        }
+
+        inline void set_y(int y) {
+            this->rect.y = y;
         }
 
         inline int width() {
@@ -65,11 +76,11 @@ class Object {
         }
 
         inline int center_x() {
-            return this->rect.x + this->half_x;
+            return this->rect.x + this->half_w;
         }
 
         inline int center_y() {
-            return this->rect.y + this->half_y;
+            return this->rect.y + this->half_h;
         }
 };
 
