@@ -12,3 +12,4 @@ _deps
 /lib/*
 /build/*
 /.vscode/*
+raylib.h
