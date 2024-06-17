@@ -1,4 +1,11 @@
-const char *TITLE = "Fl1pped";
-int FPS = 60;
-int WIDTH = 800;
-int HEIGHT = 800;
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
+#define NULL_COLOR ((Color) {0, 0, 0})
+
+inline const char *TITLE = "Fl1pped";
+inline int FPS = 60;
+inline int WIDTH = 800;
+inline int HEIGHT = 800;
+
+#endif // CONFIG_HPP
