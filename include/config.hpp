@@ -1,6 +1,9 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
+#include <vector>
+#include <stdio.h>
+
 #define NULL_COLOR ((Color) {0, 0, 0})
 
 inline const char *TITLE = "Fl1pped";

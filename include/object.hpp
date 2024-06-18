@@ -9,76 +9,76 @@ class _Object {
     protected:
         Rectangle rect;
         Color color;
-        int half_w, half_h;
+        float half_w, half_h;
 
     public:
-        _Object(int x, int y, int w, int h, Color color);
+        _Object(float x, float y, float w, float h, Color color);
 
         inline void Draw_Color() {
             DrawRectangleRec(this->rect, this->color);
         }
 
-        inline int x() {
+        inline float x() {
             return this->rect.x;
         }
 
-        inline void set_x(int x) {
+        inline void set_x(float x) {
             this->rect.x = x;
         }
 
-        inline int y() {
+        inline float y() {
             return this->rect.y;
         }
 
-        inline void set_y(int y) {
+        inline void set_y(float y) {
             this->rect.y = y;
         }
 
-        inline int width() {
+        inline float width() {
             return this->rect.width;
         }
 
-        inline int height() {
+        inline float height() {
             return this->rect.height;
         }
 
-        inline int top_left_x() {
+        inline float top_left_x() {
             return this->rect.x;
         }
 
-        inline int top_left_y() {
+        inline float top_left_y() {
             return this->rect.y;
         }
 
-        inline int bot_left_x() {
+        inline float bot_left_x() {
             return this->rect.x;
         }
 
-        inline int bot_left_y() {
+        inline float bot_left_y() {
             return this->rect.y + this->rect.height;
         }
 
-        inline int top_right_x() {
+        inline float top_right_x() {
             return this->rect.x + this->rect.width;
         }
 
-        inline int top_right_y() {
+        inline float top_right_y() {
             return this->rect.y;
         }
 
-        inline int bot_right_x() {
+        inline float bot_right_x() {
             return this->rect.x + this->rect.width;
         }
 
-        inline int bot_right_y() {
+        inline float bot_right_y() {
             return this->rect.y + this->rect.height;
         }
 
-        inline int center_x() {
+        inline float center_x() {
             return this->rect.x + this->half_w;
         }
 
-        inline int center_y() {
+        inline float center_y() {
             return this->rect.y + this->half_h;
         }
 };
@@ -93,7 +93,7 @@ class Object : public _Object {
     object_type object_type_;
 
     public:
-        Object(int x, int y, int w, int h, Color color, object_type object_type_) : _Object(x, y, w, h, color) {
+        Object(float x, float y, float w, float h, Color color, object_type object_type_) : _Object(x, y, w, h, color) {
             this->object_type_ = object_type_;           
         }
 
@@ -104,7 +104,7 @@ class Object : public _Object {
 
 typedef Object Platform;
 
-inline Platform build_platform(int x, int y, int w, int h, Color color) {
+inline Platform build_platform(double x, double y, double w, double h, Color color) {
     return Object(x, y, w, h, color, PLATFORM);
 }
 
