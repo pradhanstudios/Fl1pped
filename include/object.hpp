@@ -5,15 +5,14 @@
 #include "config.hpp"
 
 // Base class for all objects
-class Object {
-    Rectangle rect;
-    Color color;
-    int half_w, half_h;
+class _Object {
+    protected:
+        Rectangle rect;
+        Color color;
+        int half_w, half_h;
 
     public:
-        Object(int x, int y, int w, int h, Color color);
-
-        void update();
+        _Object(int x, int y, int w, int h, Color color);
 
         inline void Draw_Color() {
             DrawRectangleRec(this->rect, this->color);
@@ -83,5 +82,30 @@ class Object {
             return this->rect.y + this->half_h;
         }
 };
+
+// non moving objects
+
+enum object_type {
+    PLATFORM
+};
+
+class Object : public _Object {
+    object_type object_type_;
+
+    public:
+        Object(int x, int y, int w, int h, Color color, object_type object_type_) : _Object(x, y, w, h, color) {
+            this->object_type_ = object_type_;           
+        }
+
+        inline object_type get_object_type() {
+            return this->object_type_;
+        }
+};
+
+typedef Object Platform;
+
+inline Platform build_platform(int x, int y, int w, int h, Color color) {
+    return Object(x, y, w, h, color, PLATFORM);
+}
 
 #endif // OBJECT_HPP

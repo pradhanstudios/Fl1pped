@@ -3,7 +3,7 @@
 #include "object.hpp"
 
 int main() {
-    Object obj = Object(50, 100, 20, 20, BLACK);
+    Platform obj = build_platform(50, 100, 20, 20, BLACK);
     // init window
     InitWindow(WIDTH, HEIGHT, TITLE);
 
@@ -13,8 +13,6 @@ int main() {
     // game loop
     while (!WindowShouldClose()) {
         // update
-        obj.set_x(obj.bot_right_x());
-        obj.set_y(obj.bot_left_y());
         // draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
